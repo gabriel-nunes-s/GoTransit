@@ -155,6 +155,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Esqueceu a senha?"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEsqueceuSenhaMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEntrar">
           <Properties>
@@ -179,6 +182,9 @@
               <Insets value="[5, 14, 2, 14]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEntrarMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="voltarBtn">
           <Properties>
@@ -191,6 +197,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="voltarBtnMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -210,6 +219,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Registre-se agora"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRegistreMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

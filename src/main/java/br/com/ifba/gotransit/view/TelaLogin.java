@@ -60,6 +60,11 @@ public class TelaLogin extends javax.swing.JFrame {
         lblEsqueceuSenha.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         lblEsqueceuSenha.setForeground(new java.awt.Color(51, 51, 51));
         lblEsqueceuSenha.setText("Esqueceu a senha?");
+        lblEsqueceuSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEsqueceuSenhaMouseClicked(evt);
+            }
+        });
 
         btnEntrar.setBackground(new java.awt.Color(16, 15, 15));
         btnEntrar.setFont(new java.awt.Font("Manjari", 1, 15)); // NOI18N
@@ -69,9 +74,19 @@ public class TelaLogin extends javax.swing.JFrame {
         btnEntrar.setBorderPainted(false);
         btnEntrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEntrar.setMargin(new java.awt.Insets(5, 14, 2, 14));
+        btnEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEntrarMouseClicked(evt);
+            }
+        });
 
         voltarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/backward.png"))); // NOI18N
         voltarBtn.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        voltarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarBtnMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         jLabel4.setText("Não possui uma conta?");
@@ -79,6 +94,11 @@ public class TelaLogin extends javax.swing.JFrame {
         lblRegistre.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         lblRegistre.setForeground(new java.awt.Color(153, 0, 204));
         lblRegistre.setText("Registre-se agora");
+        lblRegistre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistreMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,6 +152,33 @@ public class TelaLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void voltarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarBtnMouseClicked
+       
+        //voltar para tela inicial
+        TelaInicial telaInicial = new TelaInicial();
+        telaInicial.setVisible(true);
+        this.setVisible(false);
+       
+    }//GEN-LAST:event_voltarBtnMouseClicked
+
+    private void lblEsqueceuSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEsqueceuSenhaMouseClicked
+
+        //abrir tela esqueceu senha
+
+    }//GEN-LAST:event_lblEsqueceuSenhaMouseClicked
+
+    private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
+
+        //logar e abrir tela principal
+
+    }//GEN-LAST:event_btnEntrarMouseClicked
+
+    private void lblRegistreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistreMouseClicked
+
+        //abrir tela registro
+
+    }//GEN-LAST:event_lblRegistreMouseClicked
 
     /**
      * @param args the command line arguments
