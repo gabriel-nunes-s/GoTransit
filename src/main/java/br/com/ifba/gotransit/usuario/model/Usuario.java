@@ -22,11 +22,11 @@ public class Usuario extends PersistenceEntity {
     public Usuario() {
     }
 
-    public Usuario(String nome, String email, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
+//    public Usuario(String nome, String email, String senha) {
+//        this.nome = nome;
+//        this.email = email;
+//        this.senha = senha;
+//    }
 
     public Usuario(String nome, String email, String senha, String onibusPreferidos, Long rotasPreferidas) {
         this.nome = nome;

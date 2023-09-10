@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Usuário</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<h1>CRUD de Usuário</h1>
+
+<!-- Formulário de Criação -->
+<h2>Criar Usuário</h2>
+<form id="createUserForm">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" required><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required><br>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required><br>
+    <label for="busPreferences">Ônibus Preferidos:</label>
+    <input type="text" id="busPreferences" required><br>
+    <label for="routePreferences">Rotas Preferidas:</label>
+    <input type="number" id="routePreferences" required><br>
+    <button type="button" onclick="createUser()">Criar</button>
+</form>
+
+<!-- Formulário de Edição -->
+<h2>Editar Usuário</h2>
+<form id="editUserForm">
+    <label for="editUserId">ID do Usuário:</label>
+    <input type="number" id="editUserId" required>
+    <br>
+    <label for="editName">Nome:</label>
+    <input type="text" id="editName" required>
+    <br>
+    <label for="editEmail">Email:</label>
+    <input type="email" id="editEmail" required>
+    <br>
+    <label for="editPassword">Senha:</label>
+    <input type="password" id="editPassword" required>
+    <br>
+    <label for="editBusPreferences">Ônibus Preferidos:</label>
+    <input type="text" id="editBusPreferences" required>
+    <br>
+    <label for="editRoutePreferences">Rotas Preferidas:</label>
+    <input type="text" id="editRoutePreferences" required>
+    <br>
+</form>
+
+<!-- Tabela de Usuários -->
+<h2>Lista de Usuários</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ônibus Preferidos</th>
+        <th>Rotas Preferidas</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody id="userTableBody">
+    </tbody>
+</table>
+
+<script src="script.js"></script>
+</body>
+</html>

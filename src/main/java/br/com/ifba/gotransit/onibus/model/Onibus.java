@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.ifba.gotransit.onibus.model;
 
 import br.com.ifba.gotransit.usuario.model.Usuario;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
@@ -17,13 +14,13 @@ import java.util.Objects;
 @Entity
 @Table(name="tb_onibus")
 public class Onibus {
-    
+    @Id
     private String idOnibus;
     private String nome;
     private double latitude;
     private double longitude;
     private String horario;
-    private Usuario clientesFavoritos;
+    private Long clientesFavoritos;
     private Long rota;
     private Long ponto;
     private String infoAcessibilidade;
@@ -77,11 +74,11 @@ public class Onibus {
         this.horario = horario;
     }
 
-    public Usuario getClientesFavoritos() {
+    public Long getClientesFavoritos() {
         return clientesFavoritos;
     }
 
-    public void setClientesFavoritos(Usuario clientesFavoritos) {
+    public void setClientesFavoritos(Long clientesFavoritos) {
         this.clientesFavoritos = clientesFavoritos;
     }
 

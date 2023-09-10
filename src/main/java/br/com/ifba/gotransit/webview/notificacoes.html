@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="notificacoes.css"> <!-- Importação do arquivo CSS chamado "style.css" -->
+    <title>Notificações</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Define a fonte do texto do corpo da página */
+        }
+
+        .notifications {
+            background-color: #f2f2f2; /* Define a cor de fundo da área de notificações */
+            padding: 20px; /* Adiciona espaço interno para o conteúdo */
+        }
+
+        .notification {
+            border: 1px solid #ddd; /* Adiciona uma borda ao redor de cada notificação */
+            padding: 10px; /* Adiciona espaço interno para o conteúdo da notificação */
+            margin: 10px 0; /* Define a margem vertical entre as notificações */
+            background-color: #fff; /* Define a cor de fundo das notificações */
+        }
+
+        .notification .timestamp {
+            font-size: 12px; /* Define o tamanho da fonte da data e hora */
+            color: #010101; /* Define a cor do texto da data e hora */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="notifications">
+        <div class="notification">
+            <p>Alerta de atraso: </p> <!-- Texto da notificação -->
+            <p class="timestamp">Data: 08/09/2023 10:30 AM</p> <!-- Data e hora da notificação -->
+        </div>
+        <div class="notification">
+            <p>Alerta de atraso: </p>
+            <p class="timestamp">Data: 08/09/2023 11:45 AM</p>
+        </div>
+        <div class="notification">
+            <p>Alerta de atraso: </p>
+            <p class="timestamp">Data: 08/09/2023 02:15 PM</p>
+        </div>
+    </div>
+</body>
+</html>

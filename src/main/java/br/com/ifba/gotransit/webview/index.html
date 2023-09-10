@@ -1,71 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD de Usuário</title>
-    <link rel="stylesheet" href="styles.css">
+<!DOCTYPE html> 
 
-</head>
+<html lang="en"> 
+
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="style.css"> <!-- Importação do arquivo CSS -->
+    <title>Go Transit</title> <!-- Título da página exibido na barra do navegador -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> <!-- Importação de um arquivo CSS externo com os ícones usados -->
+</head> 
+
 <body>
-<h1>CRUD de Usuário</h1>
 
-<!-- Formulário de Criação -->
-<h2>Criar Usuário</h2>
-<form id="createUserForm">
-    <label for="name">Nome:</label>
-    <input type="text" id="name" required><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" required><br>
-    <label for="password">Senha:</label>
-    <input type="password" id="password" required><br>
-    <label for="busPreferences">Ônibus Preferidos:</label>
-    <input type="text" id="busPreferences" required><br>
-    <label for="routePreferences">Rotas Preferidas:</label>
-    <input type="number" id="routePreferences" required><br>
-    <button type="button" onclick="createUser()">Criar</button>
-</form>
+    <!-- Barra de pesquisa -->
+    <div class="search-bar"> 
+        <input type="text" placeholder="Pesquisar"> <!-- Campo de entrada de texto "Pesquisar" -->
+        <button><i class="fas fa-search"></i></button> <!-- Botão de pesquisa -->
+    </div>
 
-<!-- Formulário de Edição -->
-<h2>Editar Usuário</h2>
-<form id="editUserForm">
-    <label for="editUserId">ID do Usuário:</label>
-    <input type="number" id="editUserId" required>
-    <br>
-    <label for="editName">Nome:</label>
-    <input type="text" id="editName" required>
-    <br>
-    <label for="editEmail">Email:</label>
-    <input type="email" id="editEmail" required>
-    <br>
-    <label for="editPassword">Senha:</label>
-    <input type="password" id="editPassword" required>
-    <br>
-    <label for="editBusPreferences">Ônibus Preferidos:</label>
-    <input type="text" id="editBusPreferences" required>
-    <br>
-    <label for="editRoutePreferences">Rotas Preferidas:</label>
-    <input type="text" id="editRoutePreferences" required>
-    <br>
-</form>
+    <nav class="menu-lateral"> 
 
-<!-- Tabela de Usuários -->
-<h2>Lista de Usuários</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Ônibus Preferidos</th>
-        <th>Rotas Preferidas</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody id="userTableBody">
-    </tbody>
-</table>
+        <ul>
+            <li class="item-menu"> <!-- Item de menu 1 com classe "item-menu" -->
+                <a href="http://127.0.0.1:5500/#"> <!-- Link de menu -->
+                    <span class="icon"><i class="bi bi-house"></i></span> <!-- Ícone -->
+                    <span class="txt-link">Home</span> <!-- Texto do link -->
+                </a>
+            </li> 
 
-<script src="script.js"></script>
+            <!--Mesma lógica nas abas seguintes-->
+
+            <li class="item-menu">
+                <a href="http://127.0.0.1:5500/html/rotas.html">
+                    <span class="icon"><i class="bi bi-geo-alt"></i></span>
+                    <span class="txt-link">Rotas</span>
+
+                </a> 
+
+            </li>
+
+            <li class="item-menu">
+                <a href="http://127.0.0.1:5500/notificacoes.html">
+                    <span class="icon"><i class="bi bi-bell"></i></span>
+                    <span class="txt-link">Notificações</span>
+
+                </a>
+
+            </li>
+
+            <li class="item-menu">
+                <a href="http://127.0.0.1:5500/configuracoes.html">
+                    <span class="icon"><i class="bi bi-gear"></i></span>
+                    <span class="txt-link">Configurações</span>
+
+                </a>
+
+            </li>
+
+        </ul> 
+
+    </nav>
+
+    <main>
+
+
+    </main>
+
+    <script src="script.js"></script> <!-- Importação do arquivo JavaScript chamado "script.js" -->
+
 </body>
-</html>
+
+</html> 
+
+

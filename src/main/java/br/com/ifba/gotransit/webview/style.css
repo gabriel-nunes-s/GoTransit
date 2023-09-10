@@ -1,0 +1,108 @@
+/* Definições globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estilos para o corpo da página */
+body {
+    height: 100vh; /* altura do corpo como 100% da altura da janela */
+}
+
+/* Estilos para o menu lateral */
+nav.menu-lateral {
+    width: 70px; /* Largura inicial do menu lateral */
+    height: 100%; /* Altura do menu lateral */
+    background-color: black; /* Cor de fundo do menu lateral */
+    padding: 40px 0 40px 1%; /* Preenchimento interno do menu lateral (cima, direita, baixo, esquerda) */
+    box-shadow: 3px 0 0 #9747FF; /* Sombra à direita do menu lateral */
+    position: fixed; /* Mantém o menu lateral fixo na posição */
+    top: 0%; /* Alinha o menu ao topo da janela */
+    left: 0%; /* Alinha o menu à esquerda da janela */
+    overflow: hidden; /* Oculta conteúdo que extrapola o menu */
+    transition: .2s; /* Efeito de transição para animação do menu */
+}
+
+/* Efeito de expansão do menu lateral ao passar o mouse */
+nav.menu-lateral:hover {
+    width: 300px; /* Largura expandida do menu ao passar o mouse */
+}
+
+/* Estilos para botão de expansão do menu */
+.btn-expandir {
+    width: 100%; /* Largura do botão de expansão */
+    padding-left: 10%; /* Preenchimento à esquerda do botão de expansão */
+}
+
+.btn-expandir > i {
+    color: antiquewhite; /* Cor do ícone dentro do botão de expansão */
+    font-size: 24px; /* Tamanho do ícone */
+    cursor: pointer; /* Altera o cursor para um ponteiro ao passar o mouse */
+}
+
+/* Estilos da lista não ordenada*/
+ul {
+    height: 100%; /* Altura da lista ocupando 100% da altura do menu */
+    list-style-type: none; /* Remove os marcadores de lista padrão */
+}
+
+/* Estilos para os itens de menu */
+ul li.item-menu {
+    transition: .2s; /* Efeito de transição para os itens de menu */
+}
+
+/* Efeito de destaque ao passar o mouse sobre os itens de menu */
+ul li.item-menu:hover {
+    background: #9747FF; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilos para os links de menu */
+ul li.item-menu a {
+    color: antiquewhite; /* Cor do texto do link */
+    text-decoration: none; /* Remove sublinhado do link */
+    font-size: 20px; /* Tamanho do texto do link */
+    padding: 20px 4px; /* Preenchimento interno do link (topo, baixo, esquerda, direita) */
+    display: flex; /* Exibe os elementos como flex para alinhar horizontalmente */
+    margin-bottom: 20px; /* Margem inferior entre os links */
+    line-height: 40px; /* Altura da linha para centralizar verticalmente */
+}
+
+/* Estilos para o texto do link dentro dos itens de menu */
+ul li.item-menu a .txt-link {
+    margin-left: 40px; /* Margem à esquerda do texto do link */
+}
+
+/* Estilos para os ícones dentro dos itens de menu */
+ul li.item-menu a .icon > i {
+    font-size: 20px; /* Tamanho dos ícones */
+    margin-left: 5px; /* Margem à esquerda dos ícones */
+}
+
+/* Estilos para a barra de pesquisa */
+.search-bar {
+   
+    color: #fff; /* Cor do texto */
+    padding: 0%;
+    position: fixed; /* Torna a barra de pesquisa fixa na janela */
+    top: 0; /* A partir do topo da janela */
+    right: 0; /* A partir da direita da janela */
+    z-index: 999; /* Define a camada de sobreposição para garantir que a barra de pesquisa fique sobre outros elementos */
+}
+
+/* Adicione estilos adicionais sua barra de pesquisa, como largura, altura, etc. */
+.search-bar input[type="text"] {
+    width: 200px;
+    padding: 5px;
+    border: 1%S #9747FF;
+}
+main{
+    
+    background-image: url('img/mapa.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+
+}
