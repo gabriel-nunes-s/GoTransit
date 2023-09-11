@@ -6,6 +6,7 @@
     font-family: Arial, sans-serif;
 }
 
+
 /* Estilos para o corpo da página */
 body {
     height: 100vh; /* altura do corpo como 100% da altura da janela */
@@ -23,6 +24,7 @@ nav.menu-lateral {
     left: 0%; /* Alinha o menu à esquerda da janela */
     overflow: hidden; /* Oculta conteúdo que extrapola o menu */
     transition: .2s; /* Efeito de transição para animação do menu */
+    z-index: 999;
 }
 
 /* Efeito de expansão do menu lateral ao passar o mouse */
@@ -82,27 +84,32 @@ ul li.item-menu a .icon > i {
 
 /* Estilos para a barra de pesquisa */
 .search-bar {
-   
     color: #fff; /* Cor do texto */
     padding: 0%;
     position: fixed; /* Torna a barra de pesquisa fixa na janela */
     top: 0; /* A partir do topo da janela */
-    right: 0; /* A partir da direita da janela */
+    right: 6%; /* A partir da direita da janela */
     z-index: 999; /* Define a camada de sobreposição para garantir que a barra de pesquisa fique sobre outros elementos */
 }
 
 /* Adicione estilos adicionais sua barra de pesquisa, como largura, altura, etc. */
 .search-bar input[type="text"] {
-    width: 200px;
-    padding: 5px;
-    border: 1%S #9747FF;
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    border: 1px #9747FF;
+    border-radius: 5px;
 }
+
+/*gmp-map {*/
+/*    height: 500px;*/
+/*}*/
+
 main{
-    
-    background-image: url('img/mapa.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100%;
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    margin-left: 70px;
+    /*height: 100%;*/
 
 }
