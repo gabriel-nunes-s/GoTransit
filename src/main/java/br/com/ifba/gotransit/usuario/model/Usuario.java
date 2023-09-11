@@ -1,22 +1,34 @@
 package br.com.ifba.gotransit.usuario.model;
 
 import br.com.ifba.gotransit.infrastructure.model.PersistenceEntity;
+import br.com.ifba.gotransit.onibus.model.Onibus;
+import br.com.ifba.gotransit.rota.model.Rota;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario extends PersistenceEntity {
 
-    //@Column(nullable = false)
+    @Column(nullable = false)
     private String nome;
-    //@Column(nullable = false)
+    @Column(nullable = false)
     private String email;
-    //@Column(nullable = false)
+    @Column(nullable = false)
     private String senha;
-    private String onibusPreferidos;
-    private Long rotasPreferidas;
+    
+    @OneToMany
+    @JoinColumn(name = "onibus_preferidos")
+    private List<Onibus> onibusPreferidos = new ArrayList<>();
+    
+    @OneToMany
+    @JoinColumn(name = "rotas_favoritas")
+    private List<Rota> rotasPreferidas = new ArrayList<>();
 
 
     public Usuario() {
@@ -28,7 +40,7 @@ public class Usuario extends PersistenceEntity {
 //        this.senha = senha;
 //    }
 
-    public Usuario(String nome, String email, String senha, String onibusPreferidos, Long rotasPreferidas) {
+    public Usuario(String nome, String email, String senha, List<Onibus> onibusPreferidos, List<Rota> rotasPreferidas) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -60,19 +72,19 @@ public class Usuario extends PersistenceEntity {
         this.senha = senha;
     }
 
-    public String getOnibusPreferidos() {
+    public List<Onibus> getOnibusPreferidos() {
         return onibusPreferidos;
     }
 
-    public void setOnibusPreferidos(String onibusPreferidos) {
-        this.onibusPreferidos = onibusPreferidos;
-    }
+//    public void setOnibusPreferidos(List<Onibus> onibusPreferidos) {
+//        this.onibusPreferidos = onibusPreferidos;
+//    }
 
-    public Long getRotasPreferidas() {
+    public List<Rota> getRotasPreferidas() {
         return rotasPreferidas;
     }
 
-    public void setRotasPreferidas(Long rotasPreferidas) {
-        this.rotasPreferidas = rotasPreferidas;
-    }
+//    public void setRotasPreferidas(List<Rota> rotasPreferidas) {
+//        this.rotasPreferidas = rotasPreferidas;
+//    }
 }

@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.ifba.gotransit.ponto.model;
 
 import br.com.ifba.gotransit.infrastructure.model.PersistenceEntity;
+import br.com.ifba.gotransit.onibus.model.Onibus;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,11 +20,18 @@ import jakarta.persistence.Table;
 @Table(name="tb_ponto")
 public class Ponto extends PersistenceEntity {
     
+    @Column(nullable=false)
     private String nome;
+    @Column(length = 10)
     private double latitude;
+    @Column(length = 10)
     private double longitude;
+    @Column(length = 5)
     private String horarioOnibus;
-    private String onibusNoPonto;
+    private Onibus onibusNoPonto;
+    
+    @ManyToMany(mappedBy = "ponto")
+    private List<Onibus> onibus = new ArrayList<>();
 
     public Ponto() {
     }
@@ -64,13 +74,16 @@ public class Ponto extends PersistenceEntity {
         this.horarioOnibus = horarioOnibus;
     }
 
-    public String getOnibusNoPonto() {
+    public Onibus getOnibusNoPonto() {
         return onibusNoPonto;
     }
 
-    public void setOnibusNoPonto(String onibusNoPonto) {
+    public void setOnibusNoPonto(Onibus onibusNoPonto) {
         this.onibusNoPonto = onibusNoPonto;
     }
     
+        public List<Onibus> getOnibus() {
+        return onibus;
+    }
     
 }
