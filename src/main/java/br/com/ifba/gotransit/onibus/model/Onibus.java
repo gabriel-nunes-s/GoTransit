@@ -13,7 +13,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -35,9 +34,9 @@ public class Onibus {
     @Column(length = 5)
     private String horario;
     @OneToMany
+    @JoinColumn(name = "usuario_id")
     private List<Usuario> clientesFavoritos = new ArrayList<>();
     @ManyToMany
-    //@JoinTable
     private List<Rota> rota = new ArrayList<>();
     @ManyToMany
     @JoinTable(name = "tb_onibus_ponto", joinColumns = @JoinColumn(name = "onibus_id"), inverseJoinColumns = @JoinColumn(name = "ponto_id"))

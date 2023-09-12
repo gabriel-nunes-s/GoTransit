@@ -23,11 +23,11 @@ public class Usuario extends PersistenceEntity {
     private String senha;
     
     @OneToMany
-    @JoinColumn(name = "onibus_preferidos")
+    @JoinColumn(name = "onibusPreferidos")
     private List<Onibus> onibusPreferidos = new ArrayList<>();
     
     @OneToMany
-    @JoinColumn(name = "rotas_favoritas")
+    @JoinColumn(name = "rotasPreferidas")
     private List<Rota> rotasPreferidas = new ArrayList<>();
 
 

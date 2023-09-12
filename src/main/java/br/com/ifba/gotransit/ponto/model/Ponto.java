@@ -2,12 +2,9 @@ package br.com.ifba.gotransit.ponto.model;
 
 import br.com.ifba.gotransit.infrastructure.model.PersistenceEntity;
 import br.com.ifba.gotransit.onibus.model.Onibus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import br.com.ifba.gotransit.rota.model.Rota;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +25,12 @@ public class Ponto extends PersistenceEntity {
     private double longitude;
     @Column(length = 5)
     private String horarioOnibus;
-    private Onibus onibusNoPonto;
-    
     @ManyToMany(mappedBy = "ponto")
     private List<Onibus> onibus = new ArrayList<>();
+
+    @ManyToOne
+    @JoinTable(name = "tb_rota_ponto", joinColumns = @JoinColumn(name = "rota_id"), inverseJoinColumns = @JoinColumn(name = "ponto_id"))
+    private Rota rota;
 
     public Ponto() {
     }
@@ -72,14 +71,6 @@ public class Ponto extends PersistenceEntity {
 
     public void setHorarioOnibus(String horarioOnibus) {
         this.horarioOnibus = horarioOnibus;
-    }
-
-    public Onibus getOnibusNoPonto() {
-        return onibusNoPonto;
-    }
-
-    public void setOnibusNoPonto(Onibus onibusNoPonto) {
-        this.onibusNoPonto = onibusNoPonto;
     }
     
         public List<Onibus> getOnibus() {
