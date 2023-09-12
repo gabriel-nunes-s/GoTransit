@@ -5,4 +5,9 @@ function loadMapScenario() {
         mapTypeId: Microsoft.Maps.MapTypeId.road,
         zoom: 16
     });
+    var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
+        icon: './img/ponto.png',
+        anchor: new Microsoft.Maps.Point(-11.141482228589659, -42.031757296523615)
+    });
+    map.entities.push(pushpin);
 }
