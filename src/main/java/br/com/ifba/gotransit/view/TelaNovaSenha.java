@@ -4,6 +4,8 @@
  */
 package br.com.ifba.gotransit.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bia-eduao
@@ -59,9 +61,19 @@ public class TelaNovaSenha extends javax.swing.JFrame {
         btnAlterarSenha.setBorderPainted(false);
         btnAlterarSenha.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAlterarSenha.setMargin(new java.awt.Insets(5, 14, 2, 14));
+        btnAlterarSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarSenhaActionPerformed(evt);
+            }
+        });
 
         voltarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/backward.png"))); // NOI18N
         voltarBtn.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        voltarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarBtnMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Manjari", 0, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -113,6 +125,17 @@ public class TelaNovaSenha extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void voltarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarBtnMouseClicked
+        // volta para a tela de verificação de código
+        TelaVerificaCodigo telaVerificaCodigo = new TelaVerificaCodigo();
+        this.dispose();
+        telaVerificaCodigo.setVisible(true);
+    }//GEN-LAST:event_voltarBtnMouseClicked
+
+    private void btnAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarSenhaActionPerformed
+        JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!");
+    }//GEN-LAST:event_btnAlterarSenhaActionPerformed
 
     /**
      * @param args the command line arguments

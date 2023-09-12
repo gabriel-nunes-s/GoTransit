@@ -60,9 +60,19 @@ public class TelaEsqueceuSenha extends javax.swing.JFrame {
         btnEnviarCodigo.setBorderPainted(false);
         btnEnviarCodigo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEnviarCodigo.setMargin(new java.awt.Insets(5, 14, 2, 14));
+        btnEnviarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarCodigoActionPerformed(evt);
+            }
+        });
 
         voltarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/backward.png"))); // NOI18N
         voltarBtn.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        voltarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarBtnMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         jLabel4.setText("Lembra da senha?");
@@ -70,6 +80,11 @@ public class TelaEsqueceuSenha extends javax.swing.JFrame {
         lblEntrar.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         lblEntrar.setForeground(new java.awt.Color(153, 0, 204));
         lblEntrar.setText("Entrar");
+        lblEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEntrarMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Manjari", 0, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -124,6 +139,26 @@ public class TelaEsqueceuSenha extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEntrarMouseClicked
+        // abrir tela login
+        TelaLogin telaLogin = new TelaLogin();
+        this.dispose();
+        telaLogin.setVisible(true);
+    }//GEN-LAST:event_lblEntrarMouseClicked
+
+    private void voltarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarBtnMouseClicked
+        // abrir tela login
+        TelaLogin telaLogin = new TelaLogin();
+        this.dispose();
+        telaLogin.setVisible(true);
+    }//GEN-LAST:event_voltarBtnMouseClicked
+
+    private void btnEnviarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarCodigoActionPerformed
+        TelaVerificaCodigo telaVerificaCodigo = new TelaVerificaCodigo();
+        this.dispose();
+        telaVerificaCodigo.setVisible(true);
+    }//GEN-LAST:event_btnEnviarCodigoActionPerformed
 
     /**
      * @param args the command line arguments

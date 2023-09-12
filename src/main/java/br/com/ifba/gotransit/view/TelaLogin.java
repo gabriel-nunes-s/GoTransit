@@ -4,6 +4,8 @@
  */
 package br.com.ifba.gotransit.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bia-eduao
@@ -158,25 +160,31 @@ public class TelaLogin extends javax.swing.JFrame {
         //voltar para tela inicial
         TelaInicial telaInicial = new TelaInicial();
         telaInicial.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
        
     }//GEN-LAST:event_voltarBtnMouseClicked
 
     private void lblEsqueceuSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEsqueceuSenhaMouseClicked
 
         //abrir tela esqueceu senha
-
+        TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
+        this.dispose();
+        telaEsqueceuSenha.setVisible(true);
     }//GEN-LAST:event_lblEsqueceuSenhaMouseClicked
 
     private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
 
         //logar e abrir tela principal
+        JOptionPane.showMessageDialog(null, "tela principal");
 
     }//GEN-LAST:event_btnEntrarMouseClicked
 
     private void lblRegistreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistreMouseClicked
 
         //abrir tela registro
+        TelaRegistro telaRegistro = new TelaRegistro();
+        this.dispose();
+        telaRegistro.setVisible(true);
 
     }//GEN-LAST:event_lblRegistreMouseClicked
 

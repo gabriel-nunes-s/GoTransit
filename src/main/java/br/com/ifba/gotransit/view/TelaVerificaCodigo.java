@@ -4,6 +4,8 @@
  */
 package br.com.ifba.gotransit.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bia-eduao
@@ -58,9 +60,19 @@ public class TelaVerificaCodigo extends javax.swing.JFrame {
         btnVerificar.setBorderPainted(false);
         btnVerificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVerificar.setMargin(new java.awt.Insets(5, 14, 2, 14));
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
 
         voltarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/backward.png"))); // NOI18N
         voltarBtn.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        voltarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarBtnMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         jLabel4.setText("Não recebeu o código?");
@@ -68,6 +80,11 @@ public class TelaVerificaCodigo extends javax.swing.JFrame {
         lblReenviar.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         lblReenviar.setForeground(new java.awt.Color(153, 0, 204));
         lblReenviar.setText("Reenviar");
+        lblReenviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblReenviarMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Manjari", 0, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
@@ -103,16 +120,14 @@ public class TelaVerificaCodigo extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(voltarBtn)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(voltarBtn)
+                            .addComponent(jLabel3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(txtNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,11 +159,12 @@ public class TelaVerificaCodigo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNumero3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNumero2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNumero4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
@@ -162,6 +178,24 @@ public class TelaVerificaCodigo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void voltarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarBtnMouseClicked
+        // volta para a tela esqueceu a senha
+        TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
+        this.dispose();
+        telaEsqueceuSenha.setVisible(true);
+    }//GEN-LAST:event_voltarBtnMouseClicked
+
+    private void lblReenviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReenviarMouseClicked
+        JOptionPane.showMessageDialog(null, "Código reenviado!");
+    }//GEN-LAST:event_lblReenviarMouseClicked
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        // abrir tela para a troca de senha
+        TelaNovaSenha telaNovaSenha = new TelaNovaSenha();
+        this.dispose();
+        telaNovaSenha.setVisible(true);
+    }//GEN-LAST:event_btnVerificarActionPerformed
 
     /**
      * @param args the command line arguments

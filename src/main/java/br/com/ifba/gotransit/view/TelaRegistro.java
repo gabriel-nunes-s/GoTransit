@@ -4,6 +4,8 @@
  */
 package br.com.ifba.gotransit.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bia-eduao
@@ -66,9 +68,19 @@ public class TelaRegistro extends javax.swing.JFrame {
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRegistrar.setMargin(new java.awt.Insets(5, 14, 2, 14));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         voltarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/backward.png"))); // NOI18N
         voltarBtn.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        voltarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                voltarBtnMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         jLabel4.setText("Já possui conta?");
@@ -76,6 +88,11 @@ public class TelaRegistro extends javax.swing.JFrame {
         lblEntrar.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         lblEntrar.setForeground(new java.awt.Color(153, 0, 204));
         lblEntrar.setText("Entrar");
+        lblEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEntrarMouseClicked(evt);
+            }
+        });
 
         txtNome.setBackground(new java.awt.Color(241, 241, 241));
         txtNome.setFont(new java.awt.Font("Manjari Thin", 0, 15)); // NOI18N
@@ -142,6 +159,24 @@ public class TelaRegistro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEntrarMouseClicked
+        // abrir tela login
+        TelaLogin telaLogin = new TelaLogin();
+        this.dispose();
+        telaLogin.setVisible(true);
+    }//GEN-LAST:event_lblEntrarMouseClicked
+
+    private void voltarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voltarBtnMouseClicked
+        // abrir tela inicial
+        TelaInicial telaInicial = new TelaInicial();
+        this.dispose();
+        telaInicial.setVisible(true);
+    }//GEN-LAST:event_voltarBtnMouseClicked
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        JOptionPane.showMessageDialog(null, "Usuário registrado!");
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
      * @param args the command line arguments

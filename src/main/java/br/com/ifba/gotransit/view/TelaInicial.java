@@ -4,6 +4,8 @@
  */
 package br.com.ifba.gotransit.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bia-eduao
@@ -43,15 +45,32 @@ public class TelaInicial extends javax.swing.JFrame {
         btnEntrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         btnEntrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEntrar.setMargin(new java.awt.Insets(9, 14, 2, 14));
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
 
         lblConvidado.setFont(new java.awt.Font("Manjari", 0, 14)); // NOI18N
         lblConvidado.setForeground(new java.awt.Color(153, 0, 204));
         lblConvidado.setText("Continue como convidado");
+        lblConvidado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblConvidadoMouseClicked(evt);
+            }
+        });
 
+        btnRegistrar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegistrar.setFont(new java.awt.Font("Manjari", 1, 15)); // NOI18N
+        btnRegistrar.setForeground(new java.awt.Color(51, 51, 51));
         btnRegistrar.setText("Registrar");
         btnRegistrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(16, 15, 15), 1, true));
         btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/logo.jpg"))); // NOI18N
 
@@ -72,7 +91,7 @@ public class TelaInicial extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,6 +111,26 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+        TelaLogin telaLogin = new TelaLogin();
+        this.dispose();
+        telaLogin.setVisible(true);
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        TelaRegistro telaRegistro = new TelaRegistro();
+        this.dispose();
+        telaRegistro.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void lblConvidadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConvidadoMouseClicked
+        
+        JOptionPane.showMessageDialog(null, "tela principal");
+
+    }//GEN-LAST:event_lblConvidadoMouseClicked
 
     /**
      * @param args the command line arguments
