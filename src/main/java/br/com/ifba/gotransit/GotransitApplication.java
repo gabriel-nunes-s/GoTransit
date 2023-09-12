@@ -8,13 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GotransitApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GotransitApplication.class, args);
+		//SpringApplication.run(GotransitApplication.class, args);
                 
-                /*
-                ** teste da view demonstrativa - protótipo mobile
+                
+                //teste da view demonstrativa - protótipo mobile
                 TelaInicial telaInicial = new TelaInicial();
-                **
-                */
+                
+                
 	}
 
 }
