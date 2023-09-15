@@ -15,21 +15,22 @@ import java.util.List;
 @Entity
 @Table(name="tb_rota")
 public class Rota extends PersistenceEntity{
-    @OneToMany(mappedBy = "rota")
-    private List<Ponto> ponto = new ArrayList<>();
+    
+    
+    private List<Long> ponto = new ArrayList<>();
 
     public Rota() {
     }
 
-    public Rota(List<Ponto> ponto) {
+    public Rota(List<Long> ponto) {
         this.ponto = ponto;
     }
 
-    public List<Ponto> getPonto() {
+    public List<Long> getPonto() {
         return ponto;
     }
 
-    public void setPonto(List<Ponto> ponto) {
+    public void setPonto(List<Long> ponto) {
         this.ponto = ponto;
     }
     

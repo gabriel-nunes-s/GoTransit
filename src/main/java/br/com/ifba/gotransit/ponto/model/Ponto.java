@@ -25,12 +25,10 @@ public class Ponto extends PersistenceEntity {
     private double longitude;
     @Column(length = 5)
     private String horarioOnibus;
-    @ManyToMany(mappedBy = "ponto")
-    private List<Onibus> onibus = new ArrayList<>();
+    
+    private String onibus;
 
-    @ManyToOne
-    @JoinTable(name = "tb_rota_ponto", joinColumns = @JoinColumn(name = "rota_id"), inverseJoinColumns = @JoinColumn(name = "ponto_id"))
-    private Rota rota;
+    private Long rota;
 
     public Ponto() {
     }
@@ -73,8 +71,20 @@ public class Ponto extends PersistenceEntity {
         this.horarioOnibus = horarioOnibus;
     }
     
-        public List<Onibus> getOnibus() {
+        public String getOnibus() {
         return onibus;
     }
-    
+
+    public void setOnibus(String onibus) {
+        this.onibus = onibus;
+    }
+        
+    public Long getRota() {
+        return rota;
+    }
+
+    public void setRota(Long rota) {
+        this.rota = rota;
+    }
+        
 }

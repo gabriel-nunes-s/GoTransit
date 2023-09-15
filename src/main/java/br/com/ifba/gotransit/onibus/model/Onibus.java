@@ -33,14 +33,13 @@ public class Onibus {
     private double longitude;
     @Column(length = 5)
     private String horario;
-    @OneToMany
-    @JoinColumn(name = "usuario_id")
-    private List<Usuario> clientesFavoritos = new ArrayList<>();
-    @ManyToMany
-    private List<Rota> rota = new ArrayList<>();
-    @ManyToMany
-    @JoinTable(name = "tb_onibus_ponto", joinColumns = @JoinColumn(name = "onibus_id"), inverseJoinColumns = @JoinColumn(name = "ponto_id"))
-    private List<Ponto> ponto = new ArrayList<>();
+
+    private Long clientesFavoritos;
+    
+    private Long rota;
+    
+    private Long ponto;
+    @Column(length = 50)
     private String infoAcessibilidade;
     
     public Onibus(){
@@ -92,29 +91,29 @@ public class Onibus {
         this.horario = horario;
     }
 
-    public List<Usuario> getClientesFavoritos() {
+    public Long getClientesFavoritos() {
         return clientesFavoritos;
     }
 
-//    public void setClientesFavoritos(Long clientesFavoritos) {
-//        this.clientesFavoritos = clientesFavoritos;
-//    }
+    public void setClientesFavoritos(Long clientesFavoritos) {
+        this.clientesFavoritos = clientesFavoritos;
+    }
 
-    public List<Rota> getRota() {
+    public Long getRota() {
         return rota;
     }
-//
-//    public void setRota(Long rota) {
-//        this.rota = rota;
-//    }
 
-    public List<Ponto> getPonto() {
+    public void setRota(Long rota) {
+        this.rota = rota;
+    }
+
+    public Long getPonto() {
         return ponto;
     }
 
-//    public void setPonto(Long ponto) {
-//        this.ponto = ponto;
-//    }
+    public void setPonto(Long ponto) {
+        this.ponto = ponto;
+    }
     
     
     public String getInfoAcessibilidade() {
