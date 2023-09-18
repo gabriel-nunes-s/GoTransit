@@ -37,8 +37,9 @@ public class Onibus {
     private Long clientesFavoritos;
     
     private Long rota;
-    
+
     private Long ponto;
+
     @Column(length = 50)
     private String infoAcessibilidade;
     

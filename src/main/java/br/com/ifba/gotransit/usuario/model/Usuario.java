@@ -15,8 +15,7 @@ import java.util.List;
 @Table(name = "tb_usuario")
 public class Usuario extends PersistenceEntity {
 
-    @Column(nullable = false)
-    private String nome;
+
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
@@ -26,6 +25,8 @@ public class Usuario extends PersistenceEntity {
     
     private Long rotasPreferidas;
 
+    @Column(nullable = false)
+    private String nome;
 
     public Usuario() {
     }

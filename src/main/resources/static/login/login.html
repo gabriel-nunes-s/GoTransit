@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css"> <!-- Importação do arquivo CSS -->
+</head>
+<body>
+
+    <!-- Início do contêiner do formulário -->
+<div class="form-container">
+
+	<!-- Título do formulário de login -->
+	<p class="title">Bem vindo de volta,<br>como é bom te ver novamente!</p>
+
+	<!-- Formulário de login -->
+	<form class="form">
+
+		<!-- Grupo de entrada para o nome de usuário -->
+		<div class="input-group">
+			<label for="username">Nome de usuário ou Email</label>
+			<input type="text" name="username" id="username" placeholder="">
+		</div>
+
+		<!-- Grupo de entrada para a senha -->
+		<div class="input-group">
+			<label for="password">Senha</label>
+			<input type="password" name="password" id="password" placeholder="">
+			
+			<!-- Link "Forgot Password?" dentro do grupo de senha -->
+			<div class="forgot">
+				<a rel="noopener noreferrer" href="http://127.0.0.1:5500/esqueceu.html">Esqueceu a senha?</a>
+			</div>
+		</div>
+
+		<!-- Botão de envio do formulário Entrar-->
+		<button class="sign">entrar</button>
+	</form>
+
+	<!-- Mensagem sobre o login "não possui cadastro" -->
+	<div class="social-message">
+		<div class="line"></div>
+		<p class="message">Não possui conta?</p>
+		<div class="line"></div>
+	</div>
+
+	<!-- Link para "cadastro" (Registrar-se) -->
+	<p class="signup">cadastre-se 
+		<a rel="noopener noreferrer" href="http://127.0.0.1:5500/registro.html" class="">AQUI</a>
+	</p>
+</div>
+<!-- Fim do contêiner do formulário -->
+
+    
+</body>
+</html>

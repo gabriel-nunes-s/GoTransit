@@ -17,22 +17,20 @@ import java.util.List;
 public class Rota extends PersistenceEntity{
     
     
-    private List<Long> ponto = new ArrayList<>();
+    private Long ponto;
 
     public Rota() {
     }
 
-    public Rota(List<Long> ponto) {
+    public Rota(Long ponto) {
         this.ponto = ponto;
     }
 
-    public List<Long> getPonto() {
+    public Long getPonto() {
         return ponto;
     }
 
-    public void setPonto(List<Long> ponto) {
+    public void setPonto(Long ponto) {
         this.ponto = ponto;
     }
-    
-    
 }

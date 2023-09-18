@@ -1,0 +1,160 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    background-color: rgb(0, 0, 0); /* Cor de fundo opcional */
+  }
+/* Estilização do formulário */
+.form {
+    /* Exibir como um contêiner flexível com direção de coluna */
+    display: flex;
+    flex-direction: column;
+    
+    /* Espaçamento entre elementos filhos */
+    gap: 15px;
+    
+    /* Cor de fundo */
+    background: #000000;
+    
+    /* Cantos arredondados */
+    border-radius: 5px;
+    
+    /* Sombra do box */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    
+    /* Efeito de desfoque no fundo */
+    backdrop-filter: blur(8.2px);
+    -webkit-backdrop-filter: blur(8.2px);
+    
+    /* Borda */
+    border: 1px solid #9747FF;
+    
+    /* Largura e altura fixas */
+    width: 20em;
+    height: 25em;
+  }
+  
+  /* Estilização do conteúdo dentro do formulário */
+  .content {
+    /* Exibir como um contêiner flexível com direção de coluna */
+    display: flex;
+    flex-direction: column;
+    
+    /* Espaçamento entre elementos filhos */
+    gap: 25px;
+    
+    /* Margem superior e inferior automáticas para centralização vertical */
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  
+  /* Estilização dos parágrafos dentro do formulário */
+  .form p {
+    /* Cor do texto */
+    color: #fff;
+    font-size: 20px; /* Altere o valor para o tamanho desejado em pixels */
+    font-weight: bolder; /* Peso da fonte */
+  }
+  
+  /* Estilização dos elementos de entrada de dados (input) */
+  .inp {
+    /* Centralizar horizontalmente */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Espaçamento entre palavras */
+    white-space: 4px;
+  }
+  
+  /* Estilização das caixas de entrada de dados (input) */
+  .input + .input {
+    /* Espaçamento à esquerda para separar inputs adjacentes */
+    margin-left: 0.5em;
+  }
+  
+  .input {
+    /* Cor do texto */
+    color: #fff;
+    
+    /* Altura e largura fixas */
+    height: 2em;
+    width: 2em;
+    
+    /* Flutuar à esquerda (pode ser redundante) */
+    float: left;
+    
+    /* Centralizar o texto horizontalmente */
+    text-align: center;
+    
+    /* Cor de fundo transparente */
+    background: #00000000;
+    
+    /* Remover a borda padrão do input */
+    outline: none;
+    border: 1px #9747FF solid;
+    
+    /* Cantos arredondados */
+    border-radius: 5px;
+    
+    /* Transição suave */
+    transition: all 0.6s ease;
+    
+    /* Tamanho da fonte */
+    font-size: larger;
+  }
+  
+  /* Estilização do input quando em foco */
+  .input:focus {
+    /* Remover a borda de foco padrão */
+    outline: none;
+    
+    /* Borda personalizada */
+    border: 1px #fff solid;
+  }
+  
+  /* Estilização do input quando não está vazio */
+  .input:not(:placeholder-shown) {
+    /* Mudar a cor de fundo e reduzir o tamanho */
+    background-color: #fff;
+    width: 1em;
+    height: 1em;
+  }
+  
+  /* Estilização do botão dentro do formulário */
+  .form button {
+    /* Centralizar horizontalmente */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Cor de fundo do botão*/
+    background-color: rgba(167, 139, 250, 1);
+    
+    /* Cor do texto */
+    color: rgba(17, 24, 39, 1);
+    font-weight: bold;
+    
+    /* Largura e altura fixas */
+    width: 8.5em;
+    height: 2.3em;
+    
+    /* Borda personalizada */
+    border: #9747FF 0.1em solid;
+    
+    /* Cantos arredondados */
+    border-radius: 5px;
+    
+    /* Transição suave */
+    transition: all 0.5s ease;
+  }
+  
+  /* Estilização do botão quando o mouse está sobre ele */
+  .form button:hover {
+    /* Mudar a cor de fundo e a cor do texto */
+    background-color: #fff;
+    color: #000;
+  }
+
+
+  
