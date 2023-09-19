@@ -4,9 +4,6 @@ import br.com.ifba.gotransit.infrastructure.model.PersistenceEntity;
 import br.com.ifba.gotransit.ponto.model.Ponto;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author bia-eduao
@@ -15,8 +12,6 @@ import java.util.List;
 @Entity
 @Table(name="tb_rota")
 public class Rota extends PersistenceEntity{
-    
-    
     private Long ponto;
 
     public Rota() {
@@ -33,4 +28,5 @@ public class Rota extends PersistenceEntity{
     public void setPonto(Long ponto) {
         this.ponto = ponto;
     }
+
 }

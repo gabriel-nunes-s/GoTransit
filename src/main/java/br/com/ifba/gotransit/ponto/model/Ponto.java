@@ -1,12 +1,7 @@
 package br.com.ifba.gotransit.ponto.model;
 
 import br.com.ifba.gotransit.infrastructure.model.PersistenceEntity;
-import br.com.ifba.gotransit.onibus.model.Onibus;
-import br.com.ifba.gotransit.rota.model.Rota;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -78,7 +73,7 @@ public class Ponto extends PersistenceEntity {
     public void setOnibus(String onibus) {
         this.onibus = onibus;
     }
-        
+
     public Long getRota() {
         return rota;
     }
