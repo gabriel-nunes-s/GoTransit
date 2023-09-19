@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 html, body {
     height: 100%;
     margin: 0;
@@ -5,6 +7,7 @@ html, body {
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center; /* Centraliza verticalmente */
     background-color: rgb(0, 0, 0); /* Cor de fundo opcional */
+    font-family: 'Inter', sans-serif;
   }
 /* Estilização do formulário */
 .form {
