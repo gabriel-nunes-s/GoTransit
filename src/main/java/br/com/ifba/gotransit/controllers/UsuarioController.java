@@ -18,6 +18,11 @@ public class UsuarioController {
         return usuarioService.saveUsuario(usuario);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody Usuario usuario) {
+        return usuarioService.login(usuario);
+    }
+
     @PutMapping("/atualizar")
     public ResponseEntity<Object> updateUsuario(@RequestBody Usuario usuario) {
         return usuarioService.updateUsuario(usuario);

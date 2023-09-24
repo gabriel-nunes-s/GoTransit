@@ -9,52 +9,54 @@
 <body>
 
     <!-- Início do contêiner do formulário -->
-<div class="form-container">
+	<div class="form-container">
 
-	<!-- Título do formulário de login -->
-	<p class="title">Olá, registre-se para começar</p>
+		<!-- Título do formulário de login -->
+		<p class="title">Olá, registre-se para começar</p>
 
-	<!-- Formulário de login -->
-	<form class="form">
+		<!-- Formulário de login -->
+		<form class="form" id="register-form">
 
-		<!-- Grupo de entrada para o nome de usuário -->
-		<div class="input-group">
-			<label for="username">Nome de úsuario</label>
-			<input type="text" name="username" id="username" placeholder="">
+			<!-- Grupo de entrada para o nome de usuário -->
+			<div class="input-group">
+				<label for="username">Nome de usuário</label>
+				<input type="text" name="username" id="username" required>
+			</div>
+
+			<!-- Grupo de entrada para o nome de email -->
+			<div class="input-group">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" required>
+			</div>
+
+			<!-- Grupo de entrada para a senha -->
+			<div class="input-group">
+				<label for="password">Senha</label>
+				<input type="password" name="password" id="password" required>
+
+			</div>
+
+			<!-- Grupo de entrada para confirmar senha -->
+			<div class="input-group">
+				<label for="password">Confirmar senha</label>
+				<input type="password" name="confirm-password" id="confirm-password" required>
+			</div>
+
+			<!-- Botão de envio do formulário -->
+			<button class="registro" type="submit">Registrar</button>
+		</form>
+
+		<!-- Mensagem sobre o login "não possui cadastro" -->
+		<div class="social-message">
+			<div class="line"></div>
+			<p class="message">Já possui conta? <a href="../login/login.html">Entrar</a></p>
+			<div class="line"></div>
 		</div>
 
-        <!-- Grupo de entrada para o nome de email -->
-		<div class="input-group">
-			<label for="username">Email</label>
-			<input type="text" name="username" id="username" placeholder="">
-		</div>
-
-		<!-- Grupo de entrada para a senha -->
-		<div class="input-group">
-			<label for="password">Senha</label>
-			<input type="password" name="password" id="password" placeholder="">
-
-		</div>
-
-		<!-- Grupo de entrada para confirmar senha -->
-		<div class="input-group">
-			<label for="password">Confirmar senha</label>
-			<input type="password" name="password" id="password" placeholder="">
-		</div>
-
-		<!-- Botão de envio do formulário -->
-		<button class="registro">Registrar</button>
-	</form>
-
-	<!-- Mensagem sobre o login "não possui cadastro" -->
-	<div class="social-message">
-		<div class="line"></div>
-		<p class="message">Já possui conta? <a href="../login/login.html">Entrar</a></p>
-		<div class="line"></div>
 	</div>
-
-</div>
-<!-- Fim do contêiner do formulário -->
+	<!-- Fim do contêiner do formulário -->
     
+	<script src="../api/api.js"></script>
+	<script src="./registro.js"></script>
 </body>
 </html>

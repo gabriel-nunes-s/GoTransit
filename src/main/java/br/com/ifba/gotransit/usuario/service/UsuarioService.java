@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService implements IUsuarioService {
 
@@ -15,8 +17,27 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public ResponseEntity<Object> saveUsuario(Usuario usuario) {
+        if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("O e-mail informado já existe.");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(usuarioRepository.save(usuario));
+    }
+
+    @Override
+    public ResponseEntity<Object> login(Usuario usuario) {
+        Optional<Usuario> usuarioDb = usuarioRepository.findByEmail(usuario.getEmail());
+
+        if (!usuarioDb.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O e-mail informado está incorreto.");
+        }
+
+        if (!(usuarioDb.get().getSenha().equals(usuario.getSenha()))) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("A senha informada está incorreta.");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioDb.get());
     }
 
     @Override
