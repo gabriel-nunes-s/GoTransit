@@ -176,7 +176,6 @@ body {
   align-items: center;
   /* Alinha os elementos verticalmente ao centro */
   
-  /* Adiciona espaçamento superior à mensagem */
 }
 
 
@@ -209,12 +208,11 @@ body {
     font-size: 1.4rem;
   }
   .social-message {
-    font-size: 14px;
+    font-size: 12px;
     margin: 0;
-    padding: 0;
-    justify-content: center;
+    padding-top: 15px;
   }
   .signup {
-    font-size: 14px;
+    font-size: 12px;
   }
 }

@@ -172,7 +172,7 @@ body {
   /* Exibe a mensagem dentro de um contêiner flexível */
   align-items: center;
   /* Alinha os elementos verticalmente ao centro */
-  padding-top: 2rem;
+  padding-top: 1rem;
   /* Adiciona espaçamento superior à mensagem */
 }
 
@@ -189,4 +189,43 @@ body {
   /* Define a proporção flexível da linha */
   background-color: rgba(55, 65, 81, 1);
   /* Define a cor da linha */
+}
+
+/* ---Regras CSS Responsividade--- */
+/* Telas Tablet */
+@media (max-width: 960px) {
+  .form-container {
+    width: 260px;
+    height: fit-content;
+  }
+  .title {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  .social-message {
+    margin: 0;
+  }
+  .registro {
+    width: 102%;
+  }
+}
+/* Tela Mobile */
+@media (max-width: 480px) {
+  .form-container {
+    max-height: 430px;
+    width: 230px;
+  }
+  .title {
+    margin: 0;
+    font-size: 1.4rem;
+  }
+  .social-message {
+    font-size: 12px;
+    margin: 0;
+    padding-top: 5px;
+    justify-content: center;
+  }
+  .registro {
+    width: 102%;
+  }
 }
