@@ -72,7 +72,7 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/logo.jpg"))); // NOI18N
+        //jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/gotransit/images/logo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

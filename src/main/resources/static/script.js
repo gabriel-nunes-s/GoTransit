@@ -1,13 +1,36 @@
+function getPontos() {
+    return fetch('http://localhost:8080/api/gotransit/ponto/')
+        .then(response => response.json())
+        .then(data => {
+            return data.map(ponto => ({
+                latitude: ponto.latitude,
+                longitude: ponto.longitude
+            }));
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            throw error; // Rejeita a Promise em caso de erro
+        });
+}
+
 function loadMapScenario() {
     const map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-        /* No need to set credentials if already passed in URL */
         center: new Microsoft.Maps.Location(-11.301846710502705, -41.84689850909277),
         mapTypeId: Microsoft.Maps.MapTypeId.road,
-        zoom: 16
+        zoom: 15
     });
-    var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), {
-        icon: './img/ponto.png',
-        anchor: new Microsoft.Maps.Point(-11.141482228589659, -42.031757296523615)
-    });
-    map.entities.push(pushpin);
+
+    getPontos()
+        .then(pontos => {
+            pontos.forEach(ponto => {
+                const location = new Microsoft.Maps.Location(ponto.latitude, ponto.longitude);
+                const pushpin = new Microsoft.Maps.Pushpin(location, {
+                    icon: './img/ponto.png'
+                });
+                map.entities.push(pushpin);
+            });
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
 }

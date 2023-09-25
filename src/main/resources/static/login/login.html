@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link rel="stylesheet" href="login.css"> <!-- Importação do arquivo CSS -->
+</head>
+
+<body>
+
+	<!-- Início do contêiner do formulário -->
+	<div class="form-container">
+
+		<!-- Título do formulário de login -->
+		<p class="title">Bem vindo de volta,<br>como é bom te ver novamente!</p>
+
+		<!-- Formulário de login -->
+		<form class="form" id="login-form">
+
+			<!-- Grupo de entrada para o email -->
+			<div class="input-group">
+				<label for="email">E-mail</label>
+				<input type="email" name="email" id="email" placeholder="" required>
+			</div>
+
+			<!-- Grupo de entrada para a senha -->
+			<div class="input-group">
+				<label for="password">Senha</label>
+				<input type="password" name="password" id="password" placeholder="" required>
+
+				<!-- Link "Forgot Password?" dentro do grupo de senha -->
+				<div class="forgot">
+					<a rel="noopener noreferrer" href="../forgotPassword/esqueceu.html">Esqueceu a senha?</a>
+				</div>
+			</div>
+
+			<!-- Botão de envio do formulário Entrar-->
+			<button class="sign">Entrar</button>
+		</form>
+
+		<!-- Mensagem sobre o login "não possui cadastro" -->
+		<div class="social-message">
+			<div class="line"></div>
+			<p class="message">Não possui conta?</p>
+			<div class="line"></div>
+		</div>
+
+		<!-- Link para "cadastro" (Registrar-se) -->
+		<p class="signup">Cadastre-se
+			<a href="../register/registro.html" class="">aqui</a>
+		</p>
+	</div>
+	<!-- Fim do contêiner do formulário -->
+
+	<script src="../api/api.js"></script>
+	<script src="./login.js"></script>
+</body>
+
+</html>

@@ -26,16 +26,16 @@
     <body>
         <!-- Barra de pesquisa -->
         <div class="search-bar">
-            <label>
-                <input type="text" placeholder="Pesquisar">
+            <label class="search">
+                <input type="text" placeholder="Pesquisar" id="search-input">
             </label> <!-- Campo de entrada de texto "Pesquisar" -->
-            <button><i class="fas fa-search"></i></button> <!-- Botão de pesquisa -->
+            <button id="search-button"><i class="bi bi-search"></i></button> <!-- Botão de pesquisa -->
         </div>
 
         <nav class="menu-lateral">
             <ul>
                 <li class="item-menu"> <!-- Item de menu 1 com classe "item-menu" -->
-                    <a href="http://127.0.0.1:8080/#"> <!-- Link de menu -->
+                    <a href="#"> <!-- Link de menu -->
                         <span class="icon"><i class="bi bi-house"></i></span> <!-- Ícone -->
                         <span class="txt-link">Home</span> <!-- Texto do link -->
                     </a>
@@ -44,23 +44,30 @@
                 <!--Mesma lógica nas abas seguintes-->
 
                 <li class="item-menu">
-                    <a href="http://127.0.0.1:8080/rotas.html">
+                    <a href="routes/rotas.html">
                         <span class="icon"><i class="bi bi-geo-alt"></i></span>
                         <span class="txt-link">Rotas</span>
                     </a>
                 </li>
 
                 <li class="item-menu">
-                    <a href="http://127.0.0.1:8080/notificacoes.html">
+                    <a href="notifications/notificacoes.html">
                         <span class="icon"><i class="bi bi-bell"></i></span>
                         <span class="txt-link">Notificações</span>
                     </a>
                 </li>
 
                 <li class="item-menu">
-                    <a href="http://127.0.0.1:8080/configuracoes.html">
+                    <a href="settings/configuracoes.html">
                         <span class="icon"><i class="bi bi-gear"></i></span>
                         <span class="txt-link">Configurações</span>
+                    </a>
+                </li>
+
+                <li class="item-menu">
+                    <a href="login/login.html">
+                        <span class="icon"><i class="bi bi-person-square"></i></span>
+                        <span class="txt-link">Entrar</span>
                     </a>
                 </li>
             </ul>
