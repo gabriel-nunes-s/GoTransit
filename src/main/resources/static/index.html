@@ -1,4 +1,4 @@
-<!--AIzaSyBBrt5j9uEtOzS3QXj6LiCV85lKI-XcAF8 -- API MAPS ACCOUNT 1-->
+<!--AIzaSyBMZlZ34bVfE-FqNYBFcCdmdpIp6SFE_W4 -- API MAPS ACCOUNT 1-->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,18 +8,8 @@
         <link rel="stylesheet" href="style.css"> <!-- Importação do arquivo CSS -->
         <title>Go Transit</title> <!-- Título da página exibido na barra do navegador -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> <!-- Importação de um arquivo CSS externo com os ícones usados -->
-        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AqGxuW_CIRGcA4PaLTIa8x5YQaTbe7yI1i4JYB_TELl7Xd5Y6i7KHHsNdsfDrSv0&callback=loadMapScenario' async defer></script>
-        <script src="script.js"></script> <!-- Importação do arquivo JavaScript chamado "script.js" -->
+<!--        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AqGxuW_CIRGcA4PaLTIa8x5YQaTbe7yI1i4JYB_TELl7Xd5Y6i7KHHsNdsfDrSv0&callback=loadMapScenario' async defer></script>-->
 
-    <!--    <script async-->
-    <!--            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDG4pqSdZ7j4obYST6Jt73k0tsnl1zfaCw&callback=initMap&libraries=maps,marker&v=beta">-->
-    <!--    </script>-->
-
-    <!--    <script>-->
-    <!--        function initMap() {-->
-    <!--            console.log('Maps JavaScript API loaded.');-->
-    <!--        }-->
-    <!--    </script>-->
 
     </head>
 
@@ -73,10 +63,20 @@
             </ul>
         </nav>
 
-        <main>
-    <!--        <gmp-map center="37.4220656,-122.0840897" zoom="10" map-id="DEMO_MAP_ID"></gmp-map>-->
-            <div id='myMap'></div>
+
+        <main  id="map">
+
+            <script src="script.js"></script> <!-- Importação do arquivo JavaScript chamado "script.js" -->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMZlZ34bVfE-FqNYBFcCdmdpIp6SFE_W4&callback=initMap&libraries=maps,marker&v=beta" async defer></script>
+<!--            <gmp-map center="37.4220656,-122.0840897" zoom="10" map-id="DEMO_MAP_ID"></gmp-map>-->
+<!--            <div id='myMap'></div>-->
         </main>
+
+<!--        <script>-->
+<!--            function initMap() {-->
+<!--                console.log('Maps JavaScript API loaded.');-->
+<!--            }-->
+<!--        </script>-->
     </body>
 </html> 
 
