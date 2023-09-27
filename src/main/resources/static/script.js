@@ -1,4 +1,4 @@
-var mapStyle = [
+const mapStyle = [
         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
         { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
@@ -96,7 +96,7 @@ function getPontos() {
         })
         .catch(error => {
             console.error('Erro:', error);
-            throw error; // Rejeita a Promise em caso de erro
+            throw error;
         });
 }
 
@@ -118,6 +118,12 @@ async function initMap() {
     map = new Map(document.getElementById("map"), mapOptions);
     directionsRenderer.setMap(map);
 
+    const onChangeHandler = function () {
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+    };
+
+    document.getElementById("start").addEventListener("change", onChangeHandler);
+    document.getElementById("end").addEventListener("change", onChangeHandler);
 
     getPontos()
         .then(pontos => {
@@ -128,8 +134,6 @@ async function initMap() {
                     icon: "img/ponto.png",
                     title: ponto.nome
                 };
-                console.log(ponto.nome);
-
                 const beachMarker = new google.maps.Marker(pointOptions);
                 window.initMap = initMap;
 
@@ -140,49 +144,47 @@ async function initMap() {
         });
 }
 
-// function initMap() {
-//     var directionsService = new google.maps.DirectionsService();
-//     var directionsRenderer = new google.maps.DirectionsRenderer();
-//     var chicago = new google.maps.LatLng(41.850033, -87.6500523);
-//     var mapOptions = {
-//         zoom:7,
-//         center: chicago
-//     }
-//     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-//     directionsRenderer.setMap(map);
-// }
-//
-// function calcRoute() {
-//     var start = document.getElementById('start').value;
-//     var end = document.getElementById('end').value;
-//     var request = {
-//         origin: start,
-//         destination: end,
-//         travelMode: 'DRIVING'
-//     };
-//     directionsService.route(request, function(result, status) {
-//         if (status == 'OK') {
-//             directionsRenderer.setDirections(result);
-//         }
-//     });
-// }
+async function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    const startLocation = document.getElementById("start").value;
+    const endLocation = document.getElementById("end").value;
+    let startCoords;
+    let endCoords;
 
-// {
-//     origin: 'Chicago, IL',
-//         destination: 'Los Angeles, CA',
-//     waypoints: [
-//     {
-//         location: 'Joplin, MO',
-//         stopover: false
-//     },{
-//         location: 'Oklahoma City, OK',
-//         stopover: true
-//     }],
-//     provideRouteAlternatives: false,
-//     travelMode: 'DRIVING',
-//     drivingOptions: {
-//     departureTime: new Date(/* now, or future date */),
-//         trafficModel: 'pessimistic'
-// },
-// unitSystem: google.maps.UnitSystem.IMPERIAL
-// }
+    try {
+        startCoords = await geocodeLocation(startLocation);
+        endCoords = await geocodeLocation(endLocation);
+
+        if (startCoords && endCoords) {
+            const route = await directionsService.route({
+                origin: startCoords,
+                destination: endCoords,
+                travelMode: 'DRIVING',
+                unitSystem: google.maps.UnitSystem.METRIC
+            });
+
+            directionsRenderer.setDirections(route);
+        } else {
+            window.alert("Não foi possível encontrar as coordenadas para os locais fornecidos.");
+        }
+
+    } catch (e) {
+        window.alert("Ocorreu um erro ao calcular a rota: " + e.message);
+    }
+}
+
+function geocodeLocation(locationName) {
+    return new Promise((resolve, reject) => {
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': locationName }, function(results, status) {
+            if (status === 'OK' && results[0]) {
+                var location = results[0].geometry.location;
+                resolve(location);
+            } else {
+                console.log('Não foi possível encontrar as coordenadas para: ' + locationName);
+                reject(new Error('Não foi possível encontrar as coordenadas.'));
+            }
+        });
+    });
+}
+

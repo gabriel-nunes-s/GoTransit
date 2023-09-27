@@ -8,8 +8,7 @@
         <link rel="stylesheet" href="style.css"> <!-- Importação do arquivo CSS -->
         <title>Go Transit</title> <!-- Título da página exibido na barra do navegador -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> <!-- Importação de um arquivo CSS externo com os ícones usados -->
-<!--        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AqGxuW_CIRGcA4PaLTIa8x5YQaTbe7yI1i4JYB_TELl7Xd5Y6i7KHHsNdsfDrSv0&callback=loadMapScenario' async defer></script>-->
-
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> <!-- Possibilita suporte para nav. antigos -->
 
     </head>
 
@@ -63,7 +62,18 @@
             </ul>
         </nav>
 
-
+        <div id="floating-panel">
+            <b>Origem: </b>
+            <select id="start">
+                <option value="Irecê, State of Bahia">Irecê</option>
+                <option value="Lapão, State of Bahia">Lapão</option>
+            </select>
+            <b>Destino: </b>
+            <select id="end">
+                <option value="Irecê, State of Bahia">Irecê</option>
+                <option value="Lapão, State of Bahia">Lapão</option>
+            </select>
+        </div>
         <main  id="map">
 
             <script src="script.js"></script> <!-- Importação do arquivo JavaScript chamado "script.js" -->
