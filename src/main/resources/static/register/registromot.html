@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar</title>
-	<link rel="stylesheet" href="registro.css"> <!-- Importação do arquivo CSS -->
+    <title>Registrar Motorista</title>
+	<link rel="stylesheet" href="registromot.css"> <!-- Importação do arquivo CSS -->
 </head>
 <body>
 
@@ -12,7 +12,7 @@
 	<div class="form-container">
 
 		<!-- Título do formulário de login -->
-		<p class="title">Olá, registre-se para começar</p>
+		<p class="title"> Registre-se para começar</p>
 
 		<!-- Formulário de login -->
 		<form class="form" id="register-form">
@@ -27,6 +27,20 @@
 			<div class="input-group">
 				<label for="email">Email</label>
 				<input type="email" name="email" id="email" required>
+			</div>
+
+            <!-- Grupo de entrada para a CNH do motorista -->
+			<div class="input-group">
+				<label for="cnh">Número da CNH</label>
+				<input type="text" name="cnh" id="cnh" required>
+
+			</div>
+
+             <!-- Grupo de entrada para o número de identificação do motorista -->
+			<div class="input-group">
+				<label for="identification">Número de identificação</label>
+				<input type="text" name="identification" id="identification" required>
+
 			</div>
 
 			<!-- Grupo de entrada para a senha -->
@@ -46,6 +60,7 @@
 			<button class="registro" type="submit">Registrar</button>
 		</form>
 
+
 		<!-- Mensagem sobre o login "não possui cadastro" -->
 		<div class="social-message">
 			<div class="line"></div>
@@ -53,15 +68,10 @@
 			<div class="line"></div>
 		</div>
 
-        <!-- Mensagem sobre o login como motorista -->
-		<div class="signup"> Registrar-se como motorista
-                <a href="./registromot.html"> Clique aqui </a>
-		</div>
-
 	</div>
 	<!-- Fim do contêiner do formulário -->
     
 	<script src="../api/api.js"></script>
-	<script src="./registro.js"></script>
+	<script src="./registromot.js"></script>
 </body>
 </html>

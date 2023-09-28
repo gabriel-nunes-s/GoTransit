@@ -15,11 +15,13 @@ import java.util.List;
 @Table(name = "tb_usuario")
 public class Usuario extends PersistenceEntity {
 
-
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String senha;
+
+    private String cnh;
+    private String identification;
     
     private String onibusPreferidos;
     
@@ -37,13 +39,21 @@ public class Usuario extends PersistenceEntity {
         this.senha = senha;
     }
 
-//    public Usuario(String nome, String email, String senha, Long onibusPreferidos, Long rotasPreferidas) {
-//        this.nome = nome;
-//        this.email = email;
-//        this.senha = senha;
-//        this.onibusPreferidos = onibusPreferidos;
-//        this.rotasPreferidas = rotasPreferidas;
-//    }
+    public Usuario(String nome, String email, String senha, String onibusPreferidos, Long rotasPreferidas) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.onibusPreferidos = onibusPreferidos;
+        this.rotasPreferidas = rotasPreferidas;
+    }
+
+    public Usuario(String email, String senha, String cnh, String identification, String nome) {
+        this.email = email;
+        this.senha = senha;
+        this.cnh = cnh;
+        this.identification = identification;
+        this.nome = nome;
+    }
 
     public String getNome() {
         return nome;
@@ -83,5 +93,21 @@ public class Usuario extends PersistenceEntity {
 
     public void setRotasPreferidas(Long rotasPreferidas) {
         this.rotasPreferidas = rotasPreferidas;
+    }
+
+    public String getCnh() {
+        return cnh;
+    }
+
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 }

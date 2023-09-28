@@ -5,6 +5,8 @@ document.getElementById("register-form").addEventListener("submit", (event) => {
     // Obtém os dados dos campos do formulário //
     const username = document.getElementById("username").value;
     const email = document.getElementById("email").value;
+    const cnh = document.getElementById("cnh").value;
+    const identification = document.getElementById("identification").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
 
@@ -17,7 +19,9 @@ document.getElementById("register-form").addEventListener("submit", (event) => {
     const newUser = {
         nome: username,
         email: email,
-        senha: password
+        senha: password,
+        cnh: cnh,
+        identificacao: identification
     }
 
     // Realizando a requisição HTTP com o método POST para a api do goTransit que salvará os dados do novo usuário // 
@@ -32,5 +36,4 @@ document.getElementById("register-form").addEventListener("submit", (event) => {
         // Se for necessário, adicionar a lógica aqui //
         alert(error);
     });
-
 });
