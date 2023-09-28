@@ -18,7 +18,7 @@ public class Ponto extends PersistenceEntity {
     private double latitude;
     @Column(length = 10)
     private double longitude;
-    @Column(length = 5)
+    //@Column(length = 5)
     private String horarioOnibus;
     
     private String onibus;

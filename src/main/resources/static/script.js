@@ -93,7 +93,7 @@ function getPontos() {
                 longitude: ponto.longitude,
                 nome: ponto.nome,
                 onibus: ponto.onibus,
-                horario_onibus:ponto.horario_onibus
+                horarioOnibus: ponto.horarioOnibus,
             }));
         })
         .catch(error => {
@@ -137,7 +137,46 @@ async function initMap() {
                     title: ponto.nome
                 };
                 const beachMarker = new google.maps.Marker(pointOptions);
+
+                beachMarker.addListener("click", () => {
+                    const div = document.querySelector("div[class*='informacoes']");
+                    div.style.display = "block";
+
+                    //console.log(ponto.horario_onibus);
+
+                    document.getElementById("nome-do-ponto").innerText = ponto.nome;
+                    if (ponto.horarioOnibus && ponto.onibus) {
+                        const horarios = ponto.horarioOnibus.split(",");
+                        const horarioPrimeiroOnibus = horarios[0];
+                        const horarioSegundoOnibus = horarios[1];
+
+                        const onibusus = ponto.onibus.split(",");
+                        const primeiroOnibus = onibusus[0];
+                        const segundoOnibus = onibusus[1];
+
+
+                        document.getElementById("horario-primeiro-onibus").innerText = horarioPrimeiroOnibus || "N/A";
+                        document.getElementById("primeiro-onibus").innerText = primeiroOnibus || "N/A";
+
+                        document.getElementById("horario-segundo-onibus").innerText = horarioSegundoOnibus || "N/A";
+                        document.getElementById("segundo-onibus").innerText = segundoOnibus || "N/A";
+                    } else {
+                        document.getElementById("horario-primeiro-onibus").innerText = "N/A";
+                        document.getElementById("primeiro-onibus").innerText = "N/A";
+
+                        document.getElementById("horario-segundo-onibus").innerText = "N/A";
+                        document.getElementById("segundo-onibus").innerText = "N/A";
+                    }
+
+                    // document.getElementById("horario-primeiro-onibus").innerText = horarioPrimeiroOnibus;
+                    // document.getElementById("horario-segundo-onibus").innerText = horarioSegundoOnibus;
+                    document.getElementById("fechar-informacoes").addEventListener("click", function() {
+                        div.style.display ="none";
+                    });
+                });
+
                 window.initMap = initMap;
+
 
             })
         })
@@ -189,13 +228,5 @@ function geocodeLocation(locationName) {
         });
     });
 }
-pointOptions.addListener("click", () => {
-    getPontos().then(pontos => {
-        function mostrarInformacoesPonto(){
 
-            var div = document.querySelector("div[class*='informacoes']");
-            div.style.display = "block";
-        }
-    })
-})
 
