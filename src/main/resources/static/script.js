@@ -91,7 +91,9 @@ function getPontos() {
             return data.map(ponto => ({
                 latitude: ponto.latitude,
                 longitude: ponto.longitude,
-                nome: ponto.nome
+                nome: ponto.nome,
+                onibus: ponto.onibus,
+                horario_onibus:ponto.horario_onibus
             }));
         })
         .catch(error => {
@@ -131,7 +133,7 @@ async function initMap() {
                 const pointOptions = {
                     position: { lat: ponto.latitude, lng: ponto.longitude },
                     map,
-                    icon: "img/ponto.png",
+                    icon: "img/whitepin.png",
                     title: ponto.nome
                 };
                 const beachMarker = new google.maps.Marker(pointOptions);
@@ -187,4 +189,13 @@ function geocodeLocation(locationName) {
         });
     });
 }
+pointOptions.addListener("click", () => {
+    getPontos().then(pontos => {
+        function mostrarInformacoesPonto(){
+
+            var div = document.querySelector("div[class*='informacoes']");
+            div.style.display = "block";
+        }
+    })
+})
 
