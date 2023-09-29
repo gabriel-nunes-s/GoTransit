@@ -12,20 +12,20 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="tb_rota")
 public class Rota extends PersistenceEntity{
-    private Long ponto;
+    private String ponto;
 
     public Rota() {
     }
 
-    public Rota(Long ponto) {
+    public Rota(String ponto) {
         this.ponto = ponto;
     }
 
-    public Long getPonto() {
+    public String getPonto() {
         return ponto;
     }
 
-    public void setPonto(Long ponto) {
+    public void setPonto(String ponto) {
         this.ponto = ponto;
     }
 

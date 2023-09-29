@@ -33,11 +33,18 @@
                 <!--Mesma lógica nas abas seguintes-->
 
                 <li class="item-menu">
-                    <a href="routes/rotas.html">
+                    <a href="#" id="rotas-link">
                         <span class="icon"><i class="bi bi-geo-alt"></i></span>
                         <span class="txt-link">Rotas</span>
                     </a>
                 </li>
+
+<!--                <li class="item-menu">-->
+<!--                    <a href="routes/rotas.html">-->
+<!--                        <span class="icon"><i class="bi bi-geo-alt"></i></span>-->
+<!--                        <span class="txt-link">Rotas</span>-->
+<!--                    </a>-->
+<!--                </li>-->
 
                 <li class="item-menu">
                     <a href="notifications/notificacoes.html">
@@ -62,23 +69,10 @@
             </ul>
         </nav>
 
-        <div id="floating-panel">
-            <b>Origem: </b>
-            <select id="start">
-                <option value="Irecê, State of Bahia">Irecê</option>
-                <option value="Lapão, State of Bahia">Lapão</option>
-            </select>
-            <b>Destino: </b>
-            <select id="end">
-                <option value="Irecê, State of Bahia">Irecê</option>
-                <option value="Lapão, State of Bahia">Lapão</option>
-            </select>
-        </div>
         <main  id="map">
-
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMZlZ34bVfE-FqNYBFcCdmdpIp6SFE_W4&callback=initMap&libraries=maps,marker&v=beta" defer></script>
             <script src="script.js"></script> <!-- Importação do arquivo JavaScript chamado "script.js" -->
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMZlZ34bVfE-FqNYBFcCdmdpIp6SFE_W4&callback=initMap&libraries=maps,marker&v=beta" async defer></script>
-<!--            <gmp-map center="37.4220656,-122.0840897" zoom="10" map-id="DEMO_MAP_ID"></gmp-map>-->
+            <!--            <gmp-map center="37.4220656,-122.0840897" zoom="10" map-id="DEMO_MAP_ID"></gmp-map>-->
 <!--            <div id='myMap'></div>-->
         </main>
         
@@ -101,6 +95,43 @@
 <!--                console.log('Maps JavaScript API loaded.');-->
 <!--            }-->
 <!--        </script>-->
+
+        <div id="myModal" class="modal" style="display: none;">
+            <div class="modal-content">
+
+                <!-- Início do contêiner do formulário -->
+                <div class="form-container">
+
+                    <!-- Título do formulário de localização -->
+                    <p class="title">Vamos encontrar uma boa rota</p>
+
+                    <!-- Formulário de localização-->
+                    <form class="form" id="routeForm">
+
+                        <!-- Grupo de entrada para origem -->
+                        <div class="input-group">
+                            <label for="origem">Insira sua origem</label>
+                            <input type="text" name="origem" id="origem" placeholder="">
+                        </div>
+
+                        <!-- Grupo de entrada para o destino -->
+                        <div class="input-group">
+                            <label for="destino">Insira seu destino</label>
+                            <input type="text" name="destino" id="destino" placeholder="">
+                        </div>
+
+
+                        <!-- Botão de envio do formulário -->
+                        <button class="rotas" type="submit">Mostrar Rotas</button>
+
+                        <!-- Botão para fechar o modal -->
+                        <button id="closeModal">Fechar</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html> 
 

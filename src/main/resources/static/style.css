@@ -113,7 +113,128 @@ ul li.item-menu a .icon>i {
     /* Margem à esquerda dos ícones */
 }
 
+/* Estilo para o container modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+/* Estilo para o conteúdo do modal */
+.modal-content {
+    background-color: #000000;
+    border-radius: 0; /* Remove os cantos arredondados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 0%; /* Define uma largura máxima para o conteúdo */
+    padding: 20px; /* Adiciona espaçamento interno ao conteúdo */
+    color: rgba(243, 244, 246, 1); /* Define a cor do texto */
+    border: 1px solid #9747FF; /* Borda */
+}
+
+/* Estilização do contêiner do formulário  de rotas */
+.form-container {
+    width: 320px; /* Define a largura do contêiner */
+    height: 500px;
+    border-radius: 0.75rem; /* Adiciona cantos arredondados ao contêiner */
+    background-color:  rgb(0, 0, 0); /* Define a cor de fundo */
+    padding: 3rem; /* Adiciona espaçamento interno ao contêiner */
+    color: rgba(243, 244, 246, 1); /* Define a cor do texto */
+    border: 1px solid #9747FF;  /* Borda */
+}
+
+/* Estilização do título do formulário de Rotas */
+.title {
+    text-align: center; /* Centraliza o texto */
+    font-size: 1.5rem; /* Define o tamanho da fonte */
+    line-height: 2rem; /* Define a altura da linha */
+    font-weight: 700; /* Define a espessura da fonte (negrito) */
+}
+
+/* Estilização geral do formulário de rotas*/
+.form {
+    margin-top: 1.5rem; /* Adiciona um espaçamento superior ao formulário */
+}
+
+/* Estilização dos grupos de entrada de dados */
+.input-group {
+    width: 100%; /* Define o espaço disponível */
+    margin-top: 0.30rem; /* Adiciona um pequeno espaçamento superior */
+    font-size: 0.875rem; /* Define o tamanho da fonte para os grupos */
+    line-height: 1.30rem; /* Define a altura da linha para os grupos */
+    justify-content: center; /* Adicione esta linha para centralizar horizontalmente */
+}
+
+
+/* Estilização dos rótulos dos grupos de entrada */
+.input-group label {
+    display: block; /* Faz com que os rótulos sejam exibidos em blocos separados */
+    color: rgba(156, 163, 175, 1); /* Define a cor dos rótulos */
+    margin-bottom: 2px; /* Adiciona um pequeno espaçamento inferior */
+}
+
+/* Estilização das caixas de entrada de dados */
+.input-group input {
+    width: 100%; /* Preenche todo o espaço disponível horizontalmente */
+    border-radius: 0.375rem; /* Adiciona cantos arredondados às caixas de entrada */
+    border: 1px solid rgba(55, 65, 81, 1); /* Define uma borda com cor */
+    outline: 0; /* Remove a borda de foco ao clicar na caixa de entrada */
+    background-color: rgb(4, 4, 4); /* Define a cor de fundo */
+    padding: 0.75rem 1rem; /* Adiciona espaçamento interno */
+    color: rgba(243, 244, 246, 1); /* Define a cor do texto nas caixas de entrada */
+}
+
+/* Estilização das caixas de entrada de dados quando estão em foco */
+.input-group input:focus {
+    border-color: #9747FF; /* Altera a cor da borda quando a caixa está em foco */
+}
+
+.rotas {
+    display: block; /* Faz o botão ocupar toda a largura do contêiner */
+    width: 100%; /* Preenche todo o espaço disponível horizontalmente */
+    background-color: rgba(167, 139, 250, 1); /* Define a cor de fundo do botão */
+    padding: 0.75rem; /* Adiciona espaçamento interno ao botão */
+    text-align: center; /* Centraliza o texto no botão */
+    color: rgba(17, 24, 39, 1); /* Define a cor do texto no botão */
+    border: none; /* Remove a borda do botão */
+    border-radius: 0.375rem; /* Adiciona cantos arredondados ao botão */
+    font-weight: 600; /* Define a espessura da fonte (negrito) */
+    margin-top: 20px; /* Aumente o valor da margem superior (20px neste exemplo) */
+}
+
+.rotas:hover {
+    background-color: #fff;
+    color: #000; /* Mudar a cor de fundo e a cor do texto */
+}
+
+#closeModal {
+    background-color:rgba(167, 139, 250, 1);;
+    color:  rgba(17, 24, 39, 1);
+    border: none;
+    padding: 10px 60px;
+    border-radius: 0.375rem; /* Adiciona cantos arredondados ao botão */
+    font-weight: 600; /* Define a espessura da fonte (negrito) */
+    margin-top: 20px; /* Aumente o valor da margem superior (20px neste exemplo) */
+    cursor: pointer;
+}
+
+#closeModal:hover {
+    background-color: #fff;
+    color: #000; /* Mudar a cor de fundo e a cor do texto */
+
+}
+
 .search-bar {
+    top: 10px;
     position: absolute;
     left: 100px;
     padding: 11px;
@@ -151,20 +272,6 @@ main {
     margin-left: 70px;
     /*height: 100%;*/
 
-}
-
-#floating-panel {
-    position: absolute;
-    top: 10px;
-    left: 45%;
-    z-index: 5;
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    font-family: "Roboto", "sans-serif";
-    line-height: 30px;
-    padding-left: 10px;
 }
 
 .informacoes {
