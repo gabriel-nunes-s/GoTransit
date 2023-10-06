@@ -1,7 +1,8 @@
-var startLocation;
-var endLocation;
+let startCoords;
+let endCoords;
 let map;
-var directionsRenderer
+let busMarker;
+let directionsRenderer;
 
 const mapStyle = [
     { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -110,12 +111,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 directionsRenderer.setMap(null);
             }
 
+            if (busMarker){
+                busMarker.setMap(null);
+                busMarker = null;
+            }
+
             const directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer();
 
-
-            startLocation = document.getElementById("origem").value;
-            endLocation = document.getElementById("destino").value;
+            startCoords = await geocodeLocation(document.getElementById("origem").value);
+            endCoords = await geocodeLocation(document.getElementById("destino").value);
 
             directionsRenderer.setMap(map);
 
@@ -154,6 +159,7 @@ async function initMap() {
     //@ts-ignore
     const { Map } = await google.maps.importLibrary("maps");
     const irece = new google.maps.LatLng(-11.301846710502705, -41.84689850909277);
+
     const mapOptions = {
         center: irece,
         zoom: 16,
@@ -169,7 +175,7 @@ async function initMap() {
                 const pointOptions = {
                     position: { lat: point.latitude, lng: point.longitude },
                     map,
-                    icon: "img/whitepin.png",
+                    icon: "img/whitebus.png",
                     title: point.nome
                 };
                 const beachMarker = new google.maps.Marker(pointOptions);
@@ -187,7 +193,6 @@ async function initMap() {
                         const buses = point.onibus.split(",");
                         const firstBus = buses[0];
                         const secondBus = buses[1];
-
 
                         document.getElementById("horario-primeiro-onibus").innerText = timeFirstBus || "N/A";
                         document.getElementById("primeiro-onibus").innerText = firstBus || "N/A";
@@ -217,61 +222,90 @@ async function initMap() {
 }
 
 async function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    let startCoords = await geocodeLocation(startLocation);
-    let endCoords = await geocodeLocation(endLocation);
-
-    // Encontrar pontos de ônibus próximos ao destino
-    let nearbyBusStops = await getNearbyBusStops(endCoords);
-
-    if (nearbyBusStops.length > 0) {
-        // Se houver pontos de ônibus próximos, mostrar a rota até o primeiro ponto de ônibus encontrado
-        const nearestBusStop = nearbyBusStops[0];
-        const nearestBusStopCoords = new google.maps.LatLng(nearestBusStop.latitude, nearestBusStop.longitude);
-        const route = await directionsService.route({
-            origin: startCoords,
-            destination: nearestBusStopCoords,
-            travelMode: 'DRIVING',
-            unitSystem: google.maps.UnitSystem.METRIC
-        });
-
-        directionsRenderer.setDirections(route);
+    const routeResult = await calculateRoute(directionsService);
+    if (routeResult) {
+        const routeCoordinates = getRouteCoordinates(routeResult);
+        await busMovement(routeCoordinates);
+        directionsRenderer.setDirections(routeResult);
     } else {
-        // Se não houver pontos de ônibus próximos, encontrar a rota até o ponto de ônibus mais próximo
-        const nearestBusStop = findNearestBusStop(endCoords);
-
-        if (nearestBusStop) {
-            const nearestBusStopCoords = new google.maps.LatLng(nearestBusStop.latitude, nearestBusStop.longitude);
-            const route = await directionsService.route({
-                origin: startCoords,
-                destination: nearestBusStopCoords,
-                travelMode: 'DRIVING',
-                unitSystem: google.maps.UnitSystem.METRIC
-            });
-
-            directionsRenderer.setDirections(route);
-        } else {
-            // Se não houver pontos de ônibus próximos, mostrar a rota direta até o destino
-           window.alert("Não foi possível encontrar uma rota de ônibus para a localização desejada. Sentimos muito!");
-        }
+        window.alert("Não foi possível encontrar uma rota de ônibus para a localização desejada. Sentimos muito!");
     }
 }
 
-function findNearestBusStop(destination) {
-    // Encontrar o ponto de ônibus mais próximo do destino
-    let nearestBusStop = null;
-    let nearestDistance = Infinity;
+async function calculateRoute(directionsService) {
+    return new Promise((resolve, reject) => {
+        directionsService.route({
+            origin: startCoords,
+            destination: endCoords,
+            travelMode: 'DRIVING'
+        }, (response, status) => {
+            if (status === 'OK') {
+                resolve(response);
+            } else {
+                reject(new Error('Não foi possível encontrar uma rota.'));
+            }
+        });
+    });
+}
 
-    getPoints().then(points => {points.forEach(point => {
-        const distance = google.maps.geometry.spherical.computeDistanceBetween(
-            new google.maps.LatLng(point.latitude, point.longitude),
-            destination
-        );
-        if (distance < nearestDistance) {
-            nearestDistance = distance;
-            nearestBusStop = point;
+function getRouteCoordinates(route) {
+    const routeCoordinates = [];
+    const legs = route.routes[0].legs;
+    for (const leg of legs) {
+        for (const step of leg.steps) {
+            const path = step.path;
+            for (const point of path) {
+                routeCoordinates.push({
+                    latitude: point.lat(),
+                    longitude: point.lng()
+                });
+            }
         }
-    })});
-    return nearestBusStop;
+    }
+    return routeCoordinates;
+}
+
+function busMovement(routeCoordinates) {
+    let progress = 0;
+    let previousTimestamp;
+
+    function moveBus(timestamp) {
+        if (!previousTimestamp) {
+            previousTimestamp = timestamp;
+        }
+
+        const timeDiff = timestamp - previousTimestamp;
+        const distance = (timeDiff / 1000) * 4; // Define uma velocidade de 4 metros por segundo
+
+        progress += distance;
+
+        if (progress >= routeCoordinates.length) {
+            // Ônibus chegou ao destino, não faz nada
+            return;
+        }
+
+        const newPosition = routeCoordinates[Math.floor(progress)];
+        updateBusMarkerPosition(newPosition);
+
+        previousTimestamp = timestamp;
+
+        requestAnimationFrame(moveBus);
+    }
+
+    requestAnimationFrame(moveBus);
+}
+
+function updateBusMarkerPosition(position) {
+    if (!busMarker) {
+        busMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(position.latitude, position.longitude),
+            map: map,
+            icon: "img/bus.png",
+            title: 'Ônibus em Movimento'
+        });
+    } else {
+        busMarker.setPosition(new google.maps.LatLng(position.latitude, position.longitude));
+    }
 }
 
 function geocodeLocation(locationName) {
@@ -293,22 +327,4 @@ function geocodeLocation(locationName) {
             });
         }
     });
-}
-
-async function getNearbyBusStops(endCoords) {
-    const points = await getPoints();
-    const nearbyBusStops = [];
-
-    points.forEach(point => {
-        const distance = google.maps.geometry.spherical.computeDistanceBetween(
-            new google.maps.LatLng(point.latitude, point.longitude),
-            endCoords
-        );
-
-        if (distance < 500) {
-            nearbyBusStops.push(point);
-        }
-    });
-
-    return nearbyBusStops;
 }
