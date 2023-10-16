@@ -119,8 +119,24 @@ document.addEventListener('DOMContentLoaded', function(event) {
             const directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer();
 
-            startCoords = await geocodeLocation(document.getElementById("origem").value);
-            endCoords = await geocodeLocation(document.getElementById("destino").value);
+            let rawStartCoords = await geocodeLocation(document.getElementById("origem").value);
+            let rawEndCoords = await geocodeLocation(document.getElementById("destino").value);
+
+            const nearestStartPoint = await calculateNearestPoint(await getPoints(), rawStartCoords, 500);
+            if (nearestStartPoint) {
+                startCoords = new google.maps.LatLng(nearestStartPoint.latitude, nearestStartPoint.longitude);
+            } else {
+                window.alert("Não há pontos de ônibus dentro do raio de 500 metros da localização fornecida.");
+                return;
+            }
+
+            const nearestEndPoint = await calculateNearestPoint(await getPoints(), rawEndCoords, 500);
+            if (nearestEndPoint) {
+                endCoords = new google.maps.LatLng(nearestEndPoint.latitude, nearestEndPoint.longitude);
+            } else {
+                window.alert("Não há pontos de ônibus dentro do raio de 500 metros da localização fornecida.");
+                return;
+            }
 
             directionsRenderer.setMap(map);
 
@@ -136,6 +152,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
     });
 
 });
+
+async function calculateNearestPoint(points, targetLocation, maxDistance) {
+    let nearestPoint = null;
+    nearestDistance = maxDistance;
+
+    for (const point of points) {
+        const distance = google.maps.geometry.spherical.computeDistanceBetween(
+            new google.maps.LatLng(point.latitude, point.longitude),
+            targetLocation
+        );
+
+        if (distance < nearestDistance) {
+            nearestPoint = point;
+            nearestDistance = distance;
+        }
+    }
+    return nearestPoint;
+}
+
 
 function getPoints() {
     return fetch('http://localhost:8080/api/gotransit/ponto/')
@@ -275,7 +310,7 @@ function busMovement(routeCoordinates) {
         }
 
         const timeDiff = timestamp - previousTimestamp;
-        const distance = (timeDiff / 1000) * 4; // Define uma velocidade de 4 metros por segundo
+        const distance = (timeDiff / 1000) * 2; // Define uma velocidade de 4 metros por segundo
 
         progress += distance;
 
