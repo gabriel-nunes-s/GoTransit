@@ -96,12 +96,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     var routesLink = document.getElementById("rotas-link");
     var modal = document.getElementById("myModal");
+    var myModalContent = document.getElementById("myModalContent");
 
     routesLink.addEventListener("click", function (event) {
         event.preventDefault();
         event.stopImmediatePropagation();
 
-        modal.style.display = "block";
+        modal.style.display = "flex";
+        modal.style.justifyContent = "flex-start";
+        modal.style.alignItems = "center";
+        
 
         routeForm.addEventListener("submit", async function(event) {
             event.preventDefault();
