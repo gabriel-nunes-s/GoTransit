@@ -285,6 +285,8 @@ main {
     bottom: 0%;
     z-index: 5;
     padding: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 
 }
 
@@ -294,7 +296,8 @@ h3 {
 
 .informacoesPonto {
     display: grid;
-    grid-template-columns: 1fr 1fr 8fr;
+    grid-template-columns: 0.8fr 1fr 8fr;
+    align-items: center;
 }
 
 #horario-primeiro-onibus, #horario-segundo-onibus{
@@ -303,7 +306,10 @@ h3 {
 }
 
 .onibus-img {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    width: 100%;
+    padding-right: 10px;
 }
 
 #fechar-informacoes, #nome-do-ponto {
