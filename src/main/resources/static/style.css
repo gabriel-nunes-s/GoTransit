@@ -233,37 +233,37 @@ ul li.item-menu a .icon>i {
 
 }
 
-.search-bar {
-    top: 10px;
-    position: absolute;
-    left: 100px;
-    padding: 11px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 4;
-}
+/*.search-bar {*/
+/*    top: 10px;*/
+/*    position: absolute;*/
+/*    left: 100px;*/
+/*    padding: 11px;*/
+/*    background-color: white;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);*/
+/*    z-index: 4;*/
+/*}*/
 
-#search-input {
-    width: 376px;
-    padding: 3px;
-    border: none;
-}
+/*#search-input {*/
+/*    width: 376px;*/
+/*    padding: 3px;*/
+/*    border: none;*/
+/*}*/
 
-#search-input:focus{
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
-}
+/*#search-input:focus{*/
+/*    box-shadow: 0 0 0 0;*/
+/*    border: 0 none;*/
+/*    outline: 0;*/
+/*}*/
 
-#search-button {
-    background-color: transparent;
-    color: black;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
+/*#search-button {*/
+/*    background-color: transparent;*/
+/*    color: black;*/
+/*    border: none;*/
+/*    padding: 5px 10px;*/
+/*    cursor: pointer;*/
+/*}*/
 
 main {
     position: relative;
@@ -328,6 +328,15 @@ h3 {
     background-color: #fff;
     color: #000;
     font-size: 1.5rem;
+    border-style: none;
+    cursor: pointer;
+    float: right;
+}
+
+#go-to-point {
+    padding: 5px;
+    background-color: #fff;
+    color: #000;
     border-style: none;
     cursor: pointer;
     float: right;

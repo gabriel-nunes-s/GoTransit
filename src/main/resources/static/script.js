@@ -1,6 +1,7 @@
 let startCoords;
 let endCoords;
 let map;
+let userLocation;
 let busMarker;
 let directionsRenderer;
 
@@ -94,9 +95,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
 
+    directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true});
     var routesLink = document.getElementById("rotas-link");
     var modal = document.getElementById("myModal");
-    var myModalContent = document.getElementById("myModalContent");
 
     routesLink.addEventListener("click", function (event) {
         event.preventDefault();
@@ -105,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
         modal.style.display = "flex";
         modal.style.justifyContent = "flex-start";
         modal.style.alignItems = "center";
-        
 
         routeForm.addEventListener("submit", async function(event) {
             event.preventDefault();
@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
             if (directionsRenderer){
                 directionsRenderer.setMap(null);
+                directionsRenderer.setDirections({ routes: [] });
             }
 
             if (busMarker){
@@ -121,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
             }
 
             const directionsService = new google.maps.DirectionsService();
-            directionsRenderer = new google.maps.DirectionsRenderer();
 
             let rawStartCoords = await geocodeLocation(document.getElementById("origem").value);
             let rawEndCoords = await geocodeLocation(document.getElementById("destino").value);
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
             directionsRenderer.setMap(map);
 
-            await calculateAndDisplayRoute(directionsService, directionsRenderer);
+            await calculateAndDisplayRoute(directionsService, directionsRenderer, "True");
 
         });
     });
@@ -249,10 +249,45 @@ async function initMap() {
                     document.getElementById("fechar-informacoes").addEventListener("click", function() {
                         div.style.display ="none";
                     });
+
+                    document.getElementById("go-to-point").addEventListener("click",  async function (event){
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(async function(position) {
+                                const directionsService = new google.maps.DirectionsService();
+
+                                if (directionsRenderer){
+                                    directionsRenderer.setMap(null);
+                                    directionsRenderer.setDirections({ routes: [] });
+                                }
+
+                                if (userLocation){
+                                    console.log("salve")
+                                    userLocation.setMap(null);
+                                    userLocation = null;
+                                }
+
+                                directionsRenderer.setMap(map);
+
+                                startCoords = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                                endCoords = new google.maps.LatLng(point.latitude, point.longitude);
+
+                                map.setCenter(startCoords);
+                                userLocation = new google.maps.Marker({
+                                    position: startCoords,
+                                    map: map,
+                                    title: "Sua Localização"
+                                });
+
+                                await calculateAndDisplayRoute(directionsService, directionsRenderer, "False");
+                            }, function(error) {
+                                console.error('Erro ao obter localização do usuário:', error);
+                            });
+                        } else {
+                            console.error('Geolocalização não é suportada neste navegador.');
+                        }
+                    });
                 });
-
                 window.initMap = initMap;
-
             })
         })
         .catch(error => {
@@ -260,18 +295,29 @@ async function initMap() {
         });
 }
 
-async function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    const routeResult = await calculateRoute(directionsService);
-    if (routeResult) {
-        const routeCoordinates = getRouteCoordinates(routeResult);
-        await busMovement(routeCoordinates);
-        directionsRenderer.setDirections(routeResult);
-    } else {
-        window.alert("Não foi possível encontrar uma rota de ônibus para a localização desejada. Sentimos muito!");
+async function calculateAndDisplayRoute(directionsService, isBus) {
+    try {
+        const routeResult = await calculateRoute(directionsService);
+        if (routeResult){
+            const routeCoordinates = getRouteCoordinates(routeResult);
+            if (isBus === "True") {
+                await busMovement(routeCoordinates);
+            }
+            directionsRenderer.setDirections(routeResult);
+        }else {
+            window.alert("Não foi possível encontrar uma rota de ônibus para a localização desejada. Sentimos muito!");
+        }
+    } catch (error) {
+        console.error("Erro ao calcular rota:", error);
+        window.alert("Erro ao calcular rota.");
     }
 }
 
 async function calculateRoute(directionsService) {
+    if (!startCoords || !endCoords){
+        return null;
+    }
+
     return new Promise((resolve, reject) => {
         directionsService.route({
             origin: startCoords,
@@ -290,9 +336,11 @@ async function calculateRoute(directionsService) {
 function getRouteCoordinates(route) {
     const routeCoordinates = [];
     const legs = route.routes[0].legs;
+
     for (const leg of legs) {
         for (const step of leg.steps) {
             const path = step.path;
+            
             for (const point of path) {
                 routeCoordinates.push({
                     latitude: point.lat(),
