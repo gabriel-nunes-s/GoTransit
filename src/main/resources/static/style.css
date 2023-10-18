@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 /* Definições globais */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 
@@ -277,7 +279,7 @@ main {
 .informacoes {
     display: none;
     color:#000;
-    background-color: #fff;
+    background-color: white;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -291,27 +293,40 @@ main {
 
 }
 
+#informacoesPonto li{
+    display: flex;
+    padding: 0 10px;
+    align-items: center;
+    width: 100%;
+    font-size: 12pt;
+}
+
+#informacoesPonto button {
+    border-style: none;
+    background-color: transparent;
+    padding: 10px;
+    font-size: 12pt;
+}
+
+#informacoesPonto p {
+    margin-left: auto;
+}
+
 h3 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 10px;
 }
 
-.informacoesPonto {
-    display: grid;
-    grid-template-columns: 0.8fr 1fr 8fr;
-    align-items: center;
-}
 
-#horario-primeiro-onibus, #horario-segundo-onibus{
+/* #horario-primeiro-onibus, #horario-segundo-onibus{
     text-align: right;
     margin-right: 20px;
-}
+} */
 
 .onibus-img {
-    margin-bottom: 8px;
-    margin-top: 8px;
-    width: 100%;
-    padding-right: 10px;
+    margin: 8px 10px 8px 0;
+    width: 64px;
+    height: 64px;
 }
 
 #fechar-informacoes, #nome-do-ponto {
@@ -319,13 +334,9 @@ h3 {
     width: auto;
 }
 
-#nome-do-ponto {
-    /*margin-right: 92%;*/
-}
-
 #fechar-informacoes {
-    padding: 5px 20px;
-    background-color: #fff;
+    padding: 5px 10px;
+    background-color: transparent;
     color: #000;
     font-size: 1.5rem;
     border-style: none;
@@ -335,7 +346,7 @@ h3 {
 
 #go-to-point {
     padding: 5px;
-    background-color: #fff;
+    background-color: transparent;
     color: #000;
     border-style: none;
     cursor: pointer;

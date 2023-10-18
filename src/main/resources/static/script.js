@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
             directionsRenderer.setMap(map);
 
-            await calculateAndDisplayRoute(directionsService, directionsRenderer, "True");
+            await calculateAndDisplayRoute(directionsService, "True");
 
         });
     });
@@ -181,6 +181,7 @@ function getPoints() {
         .then(response => response.json())
         .then(data => {
             return data.map(point => ({
+                id: point.id,
                 latitude: point.latitude,
                 longitude: point.longitude,
                 nome: point.nome,
@@ -224,33 +225,14 @@ async function initMap() {
                     div.style.display = "block";
 
                     document.getElementById("nome-do-ponto").innerText = point.nome;
-                    if (point.horarioOnibus && point.onibus) {
-                        const time = point.horarioOnibus.split(",");
-                        const timeFirstBus = time[0];
-                        const timeSecondBus = time[1];
-
-                        const buses = point.onibus.split(",");
-                        const firstBus = buses[0];
-                        const secondBus = buses[1];
-
-                        document.getElementById("horario-primeiro-onibus").innerText = timeFirstBus || "N/A";
-                        document.getElementById("primeiro-onibus").innerText = firstBus || "N/A";
-
-                        document.getElementById("horario-segundo-onibus").innerText = timeSecondBus || "N/A";
-                        document.getElementById("segundo-onibus").innerText = secondBus || "N/A";
-                    } else {
-                        document.getElementById("horario-primeiro-onibus").innerText = "N/A";
-                        document.getElementById("primeiro-onibus").innerText = "N/A";
-
-                        document.getElementById("horario-segundo-onibus").innerText = "N/A";
-                        document.getElementById("segundo-onibus").innerText = "N/A";
-                    }
+                    createBusList(point);
 
                     document.getElementById("fechar-informacoes").addEventListener("click", function() {
                         div.style.display ="none";
                     });
 
                     document.getElementById("go-to-point").addEventListener("click",  async function (event){
+                        console.log('click');
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(async function(position) {
                                 const directionsService = new google.maps.DirectionsService();
@@ -258,6 +240,11 @@ async function initMap() {
                                 if (directionsRenderer){
                                     directionsRenderer.setMap(null);
                                     directionsRenderer.setDirections({ routes: [] });
+                                }
+
+                                if (busMarker) {
+                                    busMarker.setMap(null);
+                                    busMarker = null;
                                 }
 
                                 if (userLocation){
@@ -278,13 +265,18 @@ async function initMap() {
                                     title: "Sua Localização"
                                 });
 
-                                await calculateAndDisplayRoute(directionsService, directionsRenderer, "False");
+                                await calculateAndDisplayRoute(directionsService, "False");
                             }, function(error) {
                                 console.error('Erro ao obter localização do usuário:', error);
                             });
                         } else {
                             console.error('Geolocalização não é suportada neste navegador.');
                         }
+                    });
+
+                    document.getElementsByClassName('onibus-selecionado').addEventListener('click', async function () {
+                        const busId = busButton.getAttribute('data-bus-id');
+                        await showBusRoute(busId);
                     });
                 });
                 window.initMap = initMap;
@@ -301,6 +293,10 @@ async function calculateAndDisplayRoute(directionsService, isBus) {
         if (routeResult){
             const routeCoordinates = getRouteCoordinates(routeResult);
             if (isBus === "True") {
+                if (userLocation){
+                    userLocation.setMap(null);
+                    userLocation = null;
+                }
                 await busMovement(routeCoordinates);
             }
             directionsRenderer.setDirections(routeResult);
@@ -414,4 +410,104 @@ function geocodeLocation(locationName) {
             });
         }
     });
+}
+
+async function showBusRoute(busId) {
+    // Obtenha os dados da rota do ônibus com base no ID (ou outro identificador)
+    const busRouteData = await getBusRouteData(busId);
+
+    if (busRouteData) {
+        // Limpe qualquer rota anterior
+        if (directionsRenderer) {
+            directionsRenderer.setMap(null);
+            directionsRenderer.setDirections({routes : []})
+        }
+
+        const waypoints = busRouteData.map(coord => ({
+            location: coord,
+            stopover: true
+        }));
+
+        // Crie uma solicitação de rota usando a API Directions
+        const request = {
+            origin: waypoints[0].location,
+            destination: waypoints[waypoints.length - 1].location,
+            waypoints: waypoints.slice(1, waypoints.length - 1),
+            travelMode: 'DRIVING', // Use o modo de viagem apropriado
+        };
+
+        // Crie um objeto DirectionsService e faça a solicitação
+        const directionsService = new google.maps.DirectionsService();
+        directionsRenderer.setMap(map);
+        directionsService.route(request, function (result, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(result);
+            } else {
+                console.error('Erro ao obter a rota do ônibus:', status);
+            }
+        });
+
+        // Centralize o mapa na rota
+        const bounds = new google.maps.LatLngBounds();
+        for (const coord of busRouteData) {
+            bounds.extend(coord);
+        }
+        map.fitBounds(bounds);
+    }
+}
+
+function createBusList(point){
+    // Se há dados de ônibus, crie a lista de botões
+    if (point) {
+        const busList = document.getElementById('informacoesPonto');
+
+        // Limpar qualquer conteúdo anterior na lista
+        busList.innerHTML = '';
+
+        // Criando uma lista não ordenada (ul)
+        const ul = document.createElement('ul');
+
+        // Criando botões para cada ônibus e adicione-os à lista
+        const li = document.createElement('li');
+        const busButton = document.createElement('button');
+        const p = document.createElement('p');
+        const img = document.createElement('img');
+        busButton.textContent = point.onibus;
+        busButton.setAttribute('data-bus-id', point.onibus); 
+        busButton.classList.add('bus-button');
+
+        p.textContent = point.horarioOnibus;
+        p.classList.add('horario-onibus');
+        img.src = './img/green-bus-icon.svg';
+        img.classList.add('onibus-img');
+        li.classList.add('onibus-selecionado');
+
+        // Adicione um ouvinte de evento ao botão para mostrar a rota quando clicado
+        li.addEventListener('click', function() {
+            showBusRoute(point.onibus);
+        });
+
+        li.appendChild(img);
+        li.appendChild(busButton);
+        li.appendChild(p);
+        ul.appendChild(li);
+        
+        ul.style.display = "flex";
+
+        busList.appendChild(ul); // Adicione a lista à sua página
+    }
+};
+
+async function getBusRouteData(busId) {
+    const coordinates = [];
+
+    const points = await getPoints();
+
+    points.forEach(point => {
+        if (point.onibus === busId) {
+            coordinates.push(new google.maps.LatLng(point.latitude, point.longitude));
+        }
+    });
+
+    return coordinates;
 }
