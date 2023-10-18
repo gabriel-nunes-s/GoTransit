@@ -248,7 +248,6 @@ async function initMap() {
                                 }
 
                                 if (userLocation){
-                                    console.log("salve")
                                     userLocation.setMap(null);
                                     userLocation = null;
                                 }
@@ -441,6 +440,10 @@ async function showBusRoute(busId) {
         directionsRenderer.setMap(map);
         directionsService.route(request, function (result, status) {
             if (status === 'OK') {
+                if (userLocation){
+                    userLocation.setMap(null);
+                    userLocation = null;
+                }
                 directionsRenderer.setDirections(result);
             } else {
                 console.error('Erro ao obter a rota do ônibus:', status);
