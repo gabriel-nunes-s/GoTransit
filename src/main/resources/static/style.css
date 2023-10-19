@@ -317,12 +317,6 @@ h3 {
     padding: 10px;
 }
 
-
-/* #horario-primeiro-onibus, #horario-segundo-onibus{
-    text-align: right;
-    margin-right: 20px;
-} */
-
 .onibus-img {
     margin: 8px 10px 8px 0;
     width: 64px;
@@ -351,4 +345,30 @@ h3 {
     border-style: none;
     cursor: pointer;
     float: right;
+}
+
+.clean-button {
+    position: absolute;
+    bottom: 15em;
+    right: 5px;
+    background-color: white;
+    margin: 5px;
+    border-radius: 2%;
+    border-style: none;
+    z-index: 999;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    transition: filter 0.3s ease;
+}
+
+.clean-button img {
+    filter: brightness(2);
+    width: 20px; /* Ajuste o tamanho da imagem conforme necessário */
+}
+
+.clean-button:hover {
+    #clean-img {
+        filter: brightness(0.1);
+    }
 }

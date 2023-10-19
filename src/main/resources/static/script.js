@@ -3,6 +3,7 @@ let endCoords;
 let map;
 let userLocation;
 let busMarker;
+let busMarkerFlag = true; // true = coloca o ponto na tela; false = não cria um novo ponto.
 let directionsRenderer;
 
 const mapStyle = [
@@ -91,6 +92,28 @@ const mapStyle = [
         stylers: [{ color: "#17263c" }],
     }];
 
+function restartRenderer() {
+    if (directionsRenderer) {
+        directionsRenderer.setMap(null);
+        directionsRenderer.setDirections({ routes: [] });
+    }
+}
+
+function restartBusMarker(markerFlag){
+    if (busMarker){
+        busMarker.setMap(null);
+        busMarkerFlag = markerFlag;
+        busMarker = null;
+    }
+}
+
+function restartUserLocation(){
+    if (userLocation){
+        userLocation.setMap(null);
+        userLocation = null;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -98,6 +121,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
     directionsRenderer = new google.maps.DirectionsRenderer({suppressMarkers: true});
     var routesLink = document.getElementById("rotas-link");
     var modal = document.getElementById("myModal");
+    let cleanButton = document.getElementById("clean-routes");
+
+    cleanButton.addEventListener("click", function() {
+        console.log("opa");
+        restartRenderer();
+        restartBusMarker(false);
+        restartUserLocation();
+    });
 
     routesLink.addEventListener("click", function (event) {
         event.preventDefault();
@@ -111,15 +142,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
             event.preventDefault();
             event.stopImmediatePropagation();
 
-            if (directionsRenderer){
-                directionsRenderer.setMap(null);
-                directionsRenderer.setDirections({ routes: [] });
-            }
-
-            if (busMarker){
-                busMarker.setMap(null);
-                busMarker = null;
-            }
+            restartRenderer();
+            restartBusMarker(true);
 
             const directionsService = new google.maps.DirectionsService();
 
@@ -145,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
             directionsRenderer.setMap(map);
 
             await calculateAndDisplayRoute(directionsService, "True");
-
         });
     });
 
@@ -229,28 +252,17 @@ async function initMap() {
 
                     document.getElementById("fechar-informacoes").addEventListener("click", function() {
                         div.style.display ="none";
+
                     });
 
-                    document.getElementById("go-to-point").addEventListener("click",  async function (event){
-                        console.log('click');
+                    document.getElementById("go-to-point").addEventListener("click",  async function (){
                         if (navigator.geolocation) {
                             navigator.geolocation.getCurrentPosition(async function(position) {
                                 const directionsService = new google.maps.DirectionsService();
 
-                                if (directionsRenderer){
-                                    directionsRenderer.setMap(null);
-                                    directionsRenderer.setDirections({ routes: [] });
-                                }
-
-                                if (busMarker) {
-                                    busMarker.setMap(null);
-                                    busMarker = null;
-                                }
-
-                                if (userLocation){
-                                    userLocation.setMap(null);
-                                    userLocation = null;
-                                }
+                                restartRenderer();
+                                restartBusMarker(false);
+                                restartUserLocation();
 
                                 directionsRenderer.setMap(map);
 
@@ -288,16 +300,20 @@ async function initMap() {
 
 async function calculateAndDisplayRoute(directionsService, isBus) {
     try {
+        restartBusMarker(false);
+        restartRenderer();
+
         const routeResult = await calculateRoute(directionsService);
+        directionsRenderer.setMap(map);
+
         if (routeResult){
             const routeCoordinates = getRouteCoordinates(routeResult);
+
             if (isBus === "True") {
-                if (userLocation){
-                    userLocation.setMap(null);
-                    userLocation = null;
-                }
+                restartUserLocation();
                 await busMovement(routeCoordinates);
             }
+
             directionsRenderer.setDirections(routeResult);
         }else {
             window.alert("Não foi possível encontrar uma rota de ônibus para a localização desejada. Sentimos muito!");
@@ -350,6 +366,7 @@ function getRouteCoordinates(route) {
 function busMovement(routeCoordinates) {
     let progress = 0;
     let previousTimestamp;
+    busMarkerFlag = true;
 
     function moveBus(timestamp) {
         if (!previousTimestamp) {
@@ -373,19 +390,19 @@ function busMovement(routeCoordinates) {
 
         requestAnimationFrame(moveBus);
     }
-
     requestAnimationFrame(moveBus);
+
 }
 
 function updateBusMarkerPosition(position) {
-    if (!busMarker) {
+    if (!busMarker && busMarkerFlag) {
         busMarker = new google.maps.Marker({
             position: new google.maps.LatLng(position.latitude, position.longitude),
             map: map,
             icon: "img/bus.png",
             title: 'Ônibus em Movimento'
         });
-    } else {
+    } else if (busMarkerFlag) {
         busMarker.setPosition(new google.maps.LatLng(position.latitude, position.longitude));
     }
 }
@@ -417,10 +434,8 @@ async function showBusRoute(busId) {
 
     if (busRouteData) {
         // Limpe qualquer rota anterior
-        if (directionsRenderer) {
-            directionsRenderer.setMap(null);
-            directionsRenderer.setDirections({routes : []})
-        }
+        restartRenderer();
+        restartBusMarker(false);
 
         const waypoints = busRouteData.map(coord => ({
             location: coord,
@@ -440,10 +455,7 @@ async function showBusRoute(busId) {
         directionsRenderer.setMap(map);
         directionsService.route(request, function (result, status) {
             if (status === 'OK') {
-                if (userLocation){
-                    userLocation.setMap(null);
-                    userLocation = null;
-                }
+                restartUserLocation();
                 directionsRenderer.setDirections(result);
             } else {
                 console.error('Erro ao obter a rota do ônibus:', status);
@@ -499,7 +511,7 @@ function createBusList(point){
 
         busList.appendChild(ul); // Adicione a lista à sua página
     }
-};
+}
 
 async function getBusRouteData(busId) {
     const coordinates = [];
